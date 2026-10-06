@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>My2DGame</RootNamespace>
+    <AssemblyName>My2DGame</AssemblyName>
+    <Version>0.1.0</Version>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      Pinned to Raylib-cs 7.0.1: rlImgui-cs 3.2.0 (the raylib 7.0 compatible line)
+      was built against exactly this version. Letting them float independently
+      can pull in a newer raylib whose native ABI no longer matches ImGui's backend.
+    -->
+    <PackageReference Include="Raylib-cs" Version="7.0.1" />
+    <PackageReference Include="rlImgui-cs" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Everything under Content/ is copied to the output folder, e.g. textures, fonts, audio. -->
+    <Content Include="Content/**/*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
