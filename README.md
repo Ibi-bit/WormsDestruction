@@ -8,15 +8,15 @@ A small C# game foundation using raylib for windowing, input, rendering, and aud
 dotnet run
 ```
 
-The default window settings are defined in `Core/GameConfig.cs`. On first run, `gameconfig.json` is written next to the executable; edit it to adjust the window size, title, VSync, and debug window visibility.
+The default window settings are defined in `Game/Core/GameConfig.cs`. On first run, `gameconfig.json` is written next to the executable; edit it to adjust the window size, title, VSync, and debug window visibility.
 
 For automated screenshots, set `GAME_SHOT_PATH` and optionally `GAME_SHOT_FRAME` (defaults to frame 120). The game saves the screenshot after the selected frame and continues running.
 
 ## Start Building
 
-`Scenes/GameScene.cs` is the empty starting scene. Put game state and frame updates in `Update`, world drawing in `Draw`, and optional scene-specific ImGui controls in `DrawDebugUI`. Use `OnEnter` and `OnExit` to load and release scene resources.
+`Game/Scenes/GameScene.cs` contains the current gameplay scene. Put game state and frame updates in `Update`, world drawing in `Draw`, and optional scene-specific ImGui controls in `DrawDebugUI`. Use `OnEnter` and `OnExit` to load and release scene resources.
 
-To add a scene, subclass `Scene` and register a factory in `Core/Game.cs`:
+To add a scene, subclass `Scene` and register a factory in `Game/Core/Game.cs`:
 
 ```csharp
 _scenes.Register<PauseScene>(static () => new PauseScene());
@@ -32,19 +32,25 @@ Request transitions from a scene with `Scenes.ChangeTo<PauseScene>()`. Transitio
 | `F2` | Toggle the debug window |
 | `F10` | Save a screenshot next to the executable |
 
-The debug window shows frame timing, window dimensions, mouse position, and scene-specific controls. Add project-wide development tools to `UI/DebugUI.cs`.
+The debug window shows frame timing, window dimensions, mouse position, and scene-specific controls. Add project-wide development tools to `Game/UI/DebugUI.cs`.
 
 ## Project Layout
 
 ```text
-Program.cs            Entry point
-Core/                 Game loop, settings, base scene, scene manager
-Scenes/               Starting point for game scenes
-UI/DebugUI.cs         ImGui development overlay and shortcuts
-Content/              Runtime assets, copied to the build output
+My2DGame.csproj        Project and dependency configuration
+Game/                 All game source code and runtime assets
+  Program.cs           Entry point
+  Core/                Game loop, settings, base scene, scene manager
+  Characters/          Character types and controllers
+  Physics/              Bodies, world simulation, and area effects
+  Scenes/               Gameplay scenes
+  UI/DebugUI.cs         ImGui development overlay and shortcuts
+  Weapons/              Weapons and projectiles
+  World/                Terrain and world data
+  Content/              Runtime assets, copied to build output
 ```
 
-Files in `Content/` are copied beside the executable. Load them from `AppContext.BaseDirectory`, for example with `Path.Combine(AppContext.BaseDirectory, "Content", "textures", "background.png")`.
+Files in `Game/Content/` are copied to `Content/` beside the executable. Load them from `AppContext.BaseDirectory`, for example with `Path.Combine(AppContext.BaseDirectory, "Content", "textures", "background.png")`.
 
 ## Dependencies
 

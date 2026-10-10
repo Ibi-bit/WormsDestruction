@@ -24,6 +24,29 @@ public class PhysicsWorld
     {
         bodies.Add(body);
     }
+    public void RemoveBody(Body body)
+    {
+        bodies.Remove(body);
+    }
+    public void ApplyRadialImpulse(Vector2 center, float radius, float force)
+    {
+        if (radius <= 0f || force <= 0f)
+            return;
+
+        foreach (Body body in bodies)
+        {
+            Vector2 toBody = body.Position - center;
+            float distance = toBody.Length();
+            if (distance >= radius || body.Mass <= 0f)
+                continue;
+
+            Vector2 impulseDirection = distance > 0.0001f
+                ? toBody / distance
+                : -Vector2.UnitY;
+            float impulseMagnitude = force * (1f - distance / radius);
+            body.Velocity += impulseDirection * impulseMagnitude / body.Mass;
+        }
+    }
     private bool MoveBodyOnTerrain(Body body, Vector2 displacement)
     {
         Vector2 previousPosition = body.Position;
@@ -151,6 +174,10 @@ public class PhysicsWorld
             if (body.IsWalkableSurface(collisionNormal))
                 body.isGrounded = true;
         }
+    }
+    public void CarveTerrain(Vector2 center, float radius)
+    {
+        terrain.Carve((int)center.X, (int)center.Y, (int)radius);
     }
 
     public void Draw()

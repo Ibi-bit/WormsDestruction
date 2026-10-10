@@ -2,10 +2,11 @@ using Raylib_cs;
 using System.Numerics;
 using Wriggle.World;
 using Wriggle.Physics;
-
+using Wriggle.Weapons;
+using System.Collections.Generic;
 namespace Wriggle.Characters;
 
-public class Wriggler
+public class Wriggler : Character
 {
     public enum WrigglerState
     {
@@ -14,7 +15,8 @@ public class Wriggler
         Jumping,
         Falling
     }
-    public CapsuleBody Body;
+    public override Body Body { get; }
+    public override float Health { get; set; } = 100f;
     public Color Color;
     public float MoveSpeed { get; set; } = 200f;
     public float JumpForce { get; set; } = 300f;
@@ -28,6 +30,7 @@ public class Wriggler
     public bool IsOnGround => Body.isGrounded;
     private float jumpBufferRemaining;
     private float coyoteTimeRemaining;
+    private readonly Grenade grenade = new();
 
     public Wriggler(Vector2 position, float height, float width, float mass, Color color)
     {
@@ -35,10 +38,12 @@ public class Wriggler
         Body = new CapsuleBody(position, mass, height, width);
         Body.Restitution = 0f;
     }
-    public void Update(float move, bool jumpPressed, float dt)
+    public void Update(PhysicsWorld world, IReadOnlyList<Character> characters, float move, bool jumpPressed, bool firePressed, float dt)
     {
         if (dt <= 0f)
             return;
+
+        grenade.Update(world, characters, dt);
 
         move = Math.Clamp(move, -1f, 1f);
         jumpBufferRemaining = jumpPressed
@@ -71,6 +76,11 @@ public class Wriggler
             State = WrigglerState.Moving;
         else
             State = WrigglerState.Idle;
+
+        if (firePressed)
+        {
+            grenade.Fire(world, Body.Position, new Vector2(1f, -0.5f), 0f, 0.5f);
+        }
     }
 
     private static float MoveTowards(float current, float target, float maxDelta)
@@ -81,7 +91,7 @@ public class Wriggler
         return current + MathF.Sign(target - current) * maxDelta;
     }
 
-    public void Draw()
+    public override void Draw()
     {
         Body.Draw();
     }

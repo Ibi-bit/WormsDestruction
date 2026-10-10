@@ -24,8 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Everything under Content/ is copied to the output folder, e.g. textures, fonts, audio. -->
-    <Content Include="Content/**/*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Keep assets grouped under Game/ in source while copying them to Content/ at runtime. -->
+    <Content Include="Game/Content/**/*"
+             Link="Content/%(RecursiveDir)%(Filename)%(Extension)"
+             TargetPath="Content/%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

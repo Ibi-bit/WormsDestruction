@@ -4,6 +4,7 @@ using Wriggle.World;
 using Wriggle.Physics;
 using Wriggle.Characters;
 using System.Numerics;
+using System.Collections.Generic;
 
 namespace Wriggle.Scenes;
 
@@ -11,16 +12,18 @@ namespace Wriggle.Scenes;
 public sealed class GameScene : Scene
 {
     public override string Name => "Game";
-    public string path = "Content/Maps/Basic.png";
-    private readonly Terrain terrain = Terrain.FromImage("Content/Maps/Basic.png");
+    private readonly string path = Path.Combine(AppContext.BaseDirectory, "Content", "Maps", "Basic.png");
+    private readonly Terrain terrain;
     private Camera2D camera;
     private Wriggler wriggler;
     private PhysicsWorld physicsWorld;
+    private readonly List<Character> characters = new();
     private bool isCarveMode = true;
 
 
     public GameScene()
     {
+        terrain = Terrain.FromImage(path);
         camera = new Camera2D
         {
             Target = new Vector2(terrain.W / 2f, terrain.H / 2f),
@@ -30,6 +33,7 @@ public sealed class GameScene : Scene
         };
         physicsWorld = new PhysicsWorld(terrain);
         wriggler = new Wriggler(new Vector2(100f, 200f), 20f, 10f, 1f, Color.Blue);
+        characters.Add(wriggler);
         physicsWorld.AddBody(wriggler.Body);
     }
     
@@ -40,8 +44,9 @@ public sealed class GameScene : Scene
             (Raylib.IsKeyDown(KeyboardKey.D) ? 1f : 0f) -
             (Raylib.IsKeyDown(KeyboardKey.A) ? 1f : 0f);
 
-        bool jumpPressed = Raylib.IsKeyPressed(KeyboardKey.Space);    
-        wriggler.Update(move, jumpPressed, dt);
+        bool jumpPressed = Raylib.IsKeyPressed(KeyboardKey.Space);
+        bool firePressed = Raylib.IsKeyPressed(KeyboardKey.F);
+        wriggler.Update(physicsWorld, characters, move, jumpPressed, firePressed, dt);
 
         physicsWorld.Step(dt);
         camera.Offset = new Vector2(Raylib.GetScreenWidth() / 2f, Raylib.GetScreenHeight() / 2f);
@@ -106,5 +111,6 @@ public sealed class GameScene : Scene
             isCarveMode = !isCarveMode;
         }
         ImGuiNET.ImGui.Text($"Wriggler State:{wriggler.State}");
+        ImGuiNET.ImGui.Text($"Health: {wriggler.Health:0}");
     }
 }
