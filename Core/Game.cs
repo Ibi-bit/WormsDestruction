@@ -1,9 +1,9 @@
-using My2DGame.Scenes;
-using My2DGame.UI;
+using Wriggle.Scenes;
+using Wriggle.UI;
 using Raylib_cs;
 using rlImGui_cs;
 
-namespace My2DGame.Core;
+namespace Wriggle.Core;
 
 /// <summary>
 /// Owns the raylib window, the ImGui backend and the scene manager, and runs

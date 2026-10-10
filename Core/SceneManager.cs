@@ -1,4 +1,4 @@
-namespace My2DGame.Core;
+namespace Wriggle.Core;
 
 /// <summary>
 /// Owns scene instances and pending transitions. Scenes are created lazily from

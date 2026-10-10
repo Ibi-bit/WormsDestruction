@@ -1,9 +1,9 @@
 using System.Numerics;
 using ImGuiNET;
-using My2DGame.Core;
+using Wriggle.Core;
 using Raylib_cs;
 
-namespace My2DGame.UI;
+namespace Wriggle.UI;
 
 /// <summary>
 /// The always-available ImGui overlay: global hotkeys, a scene-aware debug

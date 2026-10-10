@@ -1,4 +1,4 @@
-namespace My2DGame.Core;
+namespace Wriggle.Core;
 
 /// <summary>
 /// Base class for every game screen (title, gameplay, pause, settings...).

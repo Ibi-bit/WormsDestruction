@@ -1,9 +1,11 @@
-using My2DGame.Core;
 using Raylib_cs;
-using My2DGame.World;
+using Wriggle.Core;
+using Wriggle.World;
+using Wriggle.Physics;
+using Wriggle.Characters;
 using System.Numerics;
 
-namespace My2DGame.Scenes;
+namespace Wriggle.Scenes;
 
 /// <summary>Visible starting point for the next game's implementation.</summary>
 public sealed class GameScene : Scene
@@ -12,6 +14,10 @@ public sealed class GameScene : Scene
     public string path = "Content/Maps/Basic.png";
     private readonly Terrain terrain = Terrain.FromImage("Content/Maps/Basic.png");
     private Camera2D camera;
+    private Wriggler wriggler;
+    private PhysicsWorld physicsWorld;
+    private bool isCarveMode = true;
+
 
     public GameScene()
     {
@@ -22,10 +28,22 @@ public sealed class GameScene : Scene
             Rotation = 0f,
             Zoom = 1f
         };
+        physicsWorld = new PhysicsWorld(terrain);
+        wriggler = new Wriggler(new Vector2(100f, 200f), 20f, 10f, 1f, Color.Blue);
+        physicsWorld.AddBody(wriggler.Body);
     }
+    
 
     public override void Update(float dt)
     {
+        float move =
+            (Raylib.IsKeyDown(KeyboardKey.D) ? 1f : 0f) -
+            (Raylib.IsKeyDown(KeyboardKey.A) ? 1f : 0f);
+
+        bool jumpPressed = Raylib.IsKeyPressed(KeyboardKey.Space);    
+        wriggler.Update(move, jumpPressed, dt);
+
+        physicsWorld.Step(dt);
         camera.Offset = new Vector2(Raylib.GetScreenWidth() / 2f, Raylib.GetScreenHeight() / 2f);
 
         float wheel = Raylib.GetMouseWheelMove();
@@ -42,9 +60,27 @@ public sealed class GameScene : Scene
 
         if (Raylib.IsMouseButtonDown(MouseButton.Left))
         {
-            Vector2 mouseWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), camera);
-            terrain.Carve((int)mouseWorld.X, (int)mouseWorld.Y, 10);
+            if (isCarveMode)
+            {
+                Vector2 mouseWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), camera);
+                terrain.Carve((int)mouseWorld.X, (int)mouseWorld.Y, 10);
+                
+
+            }
+            else
+            {
+                Vector2 mouseWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), camera);
+                terrain.Paint((int)mouseWorld.X, (int)mouseWorld.Y, 10, Color.Red);
+            }
         }
+        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        {
+            Vector2 mouseWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), camera);
+            const float bodyRadius = 5f;
+            if (terrain.CircleCollisionNormal(mouseWorld, bodyRadius) == Vector2.Zero)
+                physicsWorld.AddBody(new CircleBody(mouseWorld, 1f, bodyRadius));
+        }
+
     }
 
     public override void Draw()
@@ -54,6 +90,8 @@ public sealed class GameScene : Scene
         camera.Offset = new Vector2(Raylib.GetScreenWidth() / 2f, Raylib.GetScreenHeight() / 2f);
         Raylib.BeginMode2D(camera);
         terrain.Draw();
+        physicsWorld.Draw();
+        wriggler.Draw();
         Raylib.EndMode2D();
     }
 
@@ -62,5 +100,11 @@ public sealed class GameScene : Scene
         ImGuiNET.ImGui.Text($"Terrain: {terrain.W}x{terrain.H}");
         ImGuiNET.ImGui.Text($"Path: {path}");
         ImGuiNET.ImGui.Text($"Zoom: {camera.Zoom:P0} (mouse wheel)");
+        ImGuiNET.ImGui.Text($"Bodies: {physicsWorld.BodyCount}");
+        if(ImGuiNET.ImGui.Button($"Toggle Carve Mode {(isCarveMode ? "ON" : "OFF")}"))
+        {
+            isCarveMode = !isCarveMode;
+        }
+        ImGuiNET.ImGui.Text($"Wriggler State:{wriggler.State}");
     }
 }

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace My2DGame.Core;
+namespace Wriggle.Core;
 
 /// <summary>
 /// Serializable window/settings config. Saved as <c>gameconfig.json</c> next to the

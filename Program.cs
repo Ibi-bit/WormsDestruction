@@ -1,6 +1,6 @@
-using My2DGame.Core;
+using Wriggle.Core;
 
-namespace My2DGame;
+namespace Wriggle;
 
 internal static class Program
 {

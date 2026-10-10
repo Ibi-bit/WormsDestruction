@@ -3,13 +3,19 @@ using System.Numerics;
 using Raylib_cs;
 
 
-namespace My2DGame.World;
+namespace Wriggle.World;
 
 
 
 public unsafe sealed class Terrain
 {
     public readonly int W, H;
+    private float restitution = 0.25f;
+    public float Restitution
+    {
+        get => restitution;
+        set => restitution = Math.Clamp(value, 0f, 1f);
+    }
     readonly bool[] solid;
     readonly Color[] pixels;
     Color[] scratch;
@@ -78,6 +84,33 @@ public unsafe sealed class Terrain
 
         UploadRect(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
     }
+    public void Paint(int x, int y,int r, Color color)
+    {
+        if (x < 0 || y < 0 || x >= W || y >= H) return;
+        int r2 = r * r;
+        int x0 = Math.Max(0, x - r), x1 = Math.Min(W - 1, x + r);
+        int y0 = Math.Max(0, y - r), y1 = Math.Min(H - 1, y + r);
+        if (x0 > x1 || y0 > y1) return;
+
+        for (int py = y0; py <= y1; py++)
+        {
+            int dy = py - y;
+            for (int px = x0; px <= x1; px++)
+            {
+                int dx = px - x;
+                int d2 = dx * dx + dy * dy;
+                int i = py * W + px;
+                if (d2 <= r2)
+                {
+                    solid[i] = true;
+                    pixels[i] = color;
+                }
+            }
+        }
+
+        UploadRect(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
+ 
+    }
 
     void UploadRect(int rx, int ry, int rw, int rh)
     {
@@ -89,35 +122,105 @@ public unsafe sealed class Terrain
             Raylib.UpdateTextureRec(tex, new Rectangle(rx, ry, rw, rh), p);
         }
     }
-    public Vector2 Normal(int px, int py, int radius)
+    public Vector2 CircleCollisionNormal(Vector2 center, float radius)
     {
-        Vector2 n = new Vector2(0, 0);
-        int r2 = radius * radius;
-        int x0 = Math.Max(0, px - radius), x1 = Math.Min(W - 1, px + radius);
-        int y0 = Math.Max(0, py - radius), y1 = Math.Min(H - 1, py + radius);
-        if (x0 > x1 || y0 > y1) return n;
+        if (radius <= 0f) return Vector2.Zero;
 
+        int x0 = Math.Max(0, (int)MathF.Floor(center.X - radius) - 1);
+        int x1 = Math.Min(W - 1, (int)MathF.Floor(center.X + radius));
+        int y0 = Math.Max(0, (int)MathF.Floor(center.Y - radius) - 1);
+        int y1 = Math.Min(H - 1, (int)MathF.Floor(center.Y + radius));
+        if (x0 > x1 || y0 > y1) return Vector2.Zero;
+
+        bool overlaps = false;
+        float radiusSquared = radius * radius;
+        Vector2 normal = Vector2.Zero;
         for (int y = y0; y <= y1; y++)
         {
-            int dy = y - py;
             for (int x = x0; x <= x1; x++)
             {
-                int dx = x - px;
-                int d2 = dx * dx + dy * dy;
-                if (d2 <= r2 && solid[y * W + x])
+                if (!solid[y * W + x]) continue;
+
+                float closestX = Math.Clamp(center.X, x, x + 1f);
+                float closestY = Math.Clamp(center.Y, y, y + 1f);
+                Vector2 awayFromPixel = center - new Vector2(closestX, closestY);
+                float distanceSquared = awayFromPixel.LengthSquared();
+                if (distanceSquared >= radiusSquared) continue;
+
+                overlaps = true;
+                if (distanceSquared <= 0.000001f) continue;
+
+                float distance = MathF.Sqrt(distanceSquared);
+                normal += awayFromPixel / distance * (radius - distance);
+            }
+        }
+
+        if (!overlaps) return Vector2.Zero;
+        if (normal.LengthSquared() > 0.000001f)
+            return Vector2.Normalize(normal);
+
+        return FindEscapeNormal(center, radius + 2f);
+    }
+    public Vector2 CapsuleCollisionNormal(Vector2 center, float height, float width)
+    {
+        if (height <= 0f || width <= 0f) return Vector2.Zero;
+
+        int x0 = Math.Max(0, (int)MathF.Floor(center.X - width / 2f) - 1);
+        int x1 = Math.Min(W - 1, (int)MathF.Floor(center.X + width / 2f));
+        int y0 = Math.Max(0, (int)MathF.Floor(center.Y - height / 2f) - 1);
+        int y1 = Math.Min(H - 1, (int)MathF.Floor(center.Y + height / 2f));
+        if (x0 > x1 || y0 > y1) return Vector2.Zero;
+
+        bool overlaps = false;
+        Vector2 normal = Vector2.Zero;
+        for (int y = y0; y <= y1; y++)
+        {
+            for (int x = x0; x <= x1; x++)
+            {
+                if (!solid[y * W + x]) continue;
+
+                float closestX = Math.Clamp(center.X, x, x + 1f);
+                float closestY = Math.Clamp(center.Y, y, y + 1f);
+                Vector2 awayFromPixel = center - new Vector2(closestX, closestY);
+                if (Math.Abs(awayFromPixel.X) > width / 2f || Math.Abs(awayFromPixel.Y) > height / 2f) continue;
+
+                overlaps = true;
+                if (awayFromPixel.LengthSquared() <= 0.000001f) continue;
+
+                normal += Vector2.Normalize(awayFromPixel);
+            }
+        }
+
+        if (!overlaps) return Vector2.Zero;
+        if (normal.LengthSquared() > 0.000001f)
+            return Vector2.Normalize(normal);
+
+        return FindEscapeNormal(center, Math.Max(width, height) / 2f + 2f);
+    }
+
+    private Vector2 FindEscapeNormal(Vector2 center, float searchDistance)
+    {
+        const int directions = 16;
+        Vector2 normal = Vector2.Zero;
+        for (int i = 0; i < directions; i++)
+        {
+            float angle = i * MathF.Tau / directions;
+            Vector2 direction = new(MathF.Cos(angle), MathF.Sin(angle));
+            for (float distance = 1f; distance <= searchDistance; distance += 1f)
+            {
+                int x = (int)MathF.Floor(center.X + direction.X * distance);
+                int y = (int)MathF.Floor(center.Y + direction.Y * distance);
+                if (!IsSolid(x, y))
                 {
-                    float d = MathF.Sqrt(d2);
-                    float f = 1f - d / radius;
-                    n.X += dx / d * f;
-                    n.Y += dy / d * f;
+                    normal += direction;
+                    break;
                 }
             }
         }
 
-        if (n.X != 0 || n.Y != 0)
-            n = Vector2.Normalize(n);
-
-        return n;
+        return normal.LengthSquared() > 0.000001f
+            ? Vector2.Normalize(normal)
+            : new Vector2(0f, -1f);
     }
     public void Draw()
     {
