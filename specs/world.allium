@@ -6,7 +6,6 @@
 -- Excludes:
 --   - Player, Weapon and Ammo internals (specified elsewhere)
 --   - Physics contact resolution (CircleCollisionNormal, CapsuleCollisionNormal, FindEscapeNormal): implementation of collision
---   - Terrain restitution (bounce factor and its clamping): physics concept, to be specified in the physics spec
 --   - Image loading, texture upload, drawing, unloading: infrastructure
 --   - Scorch shading of pixels near a crater: cosmetic, left to rendering
 
@@ -27,6 +26,7 @@ value Colour {
 entity Terrain {
     width: Integer
     height: Integer
+    restitution: Decimal
 
     cells: Cell with terrain = this
 }
@@ -48,6 +48,7 @@ entity GameWorld {
     weapons: List<Weapon>
     current_round: Integer
     current_turn_index: Integer
+    gravity: Decimal
 }
 
 entity Ammo {
@@ -70,6 +71,10 @@ entity AmmoGrant {
 
 config {
     solid_alpha_threshold: Integer = 128
+    terrain_restitution_default: Decimal = 0.25
+    terrain_restitution_min: Decimal = 0
+    terrain_restitution_max: Decimal = 1
+    gravity_default: Decimal = 600
 }
 
 -- Terrain
@@ -79,7 +84,8 @@ rule TerrainLoadedFromImage {
 
     ensures: Terrain.created(
         width: width,
-        height: height
+        height: height,
+        restitution: config.terrain_restitution_default
     )
     ensures:
         for pixel in pixels:
@@ -91,6 +97,8 @@ rule TerrainLoadedFromImage {
             )
 }
 
+-- Emitted by a weapon detonation together with ExplosionImpulse (physics spec), sharing its centre and radius.
+-- The carved area is also the area in which character damage applies.
 rule ExplosionCarvesTerrain {
     when: Explosion(centre_x, centre_y, radius)
 
@@ -98,6 +106,12 @@ rule ExplosionCarvesTerrain {
         for cell in world.terrain.cells where cell.is_within(centre_x, centre_y, radius):
             cell.solid = false
             cell.colour = null
+}
+
+rule RestitutionSet {
+    when: RestitutionSet(value)
+
+    ensures: world.terrain.restitution = clamp(value, config.terrain_restitution_min, config.terrain_restitution_max)
 }
 
 rule TerrainPainted {

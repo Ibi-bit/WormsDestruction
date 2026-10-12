@@ -1,0 +1,109 @@
+-- allium: 3
+-- physics.allium
+
+-- Scope: Body motion under gravity, contact with terrain and other bodies, walkable ground, and explosion impulses
+-- Includes: Body (circle and capsule shapes), PhysicsWorld stepping
+-- Excludes:
+--   - Solver tuning: substep counts, iteration counts, slop and correction factors, epsilons: implementation of the solver
+--   - Broad-phase culling and segment-closest-point maths: implementation of collision detection
+--   - Terrain collision normals (CircleCollisionNormal, CapsuleCollisionNormal): implementation of collision, see world spec for terrain itself
+--   - Drawing, debug menus and rendering of bodies: tooling
+--   - Ball helpers (StaticCollision, DynamicCollision, BorderCollision, ApplyForce, ApplyImpulse, ResoveCollision): no callers in the game, treated as dead code
+--   - Explosion damage to characters: specified with characters; its area matches the carved area (world spec)
+--   - Grenade fuse and detonation timing: specified with weapons
+--   - Terrain carving on explosion and terrain restitution: specified in the world spec
+--   - The force of an explosion: chosen by the weapon that triggers it
+
+given {
+    world: GameWorld
+    physics: PhysicsWorld
+}
+
+value Vector {
+    x: Decimal
+    y: Decimal
+
+    dot(o): x * o.x + y * o.y
+    length_squared: x * x + y * y
+}
+
+entity Body {
+    shape: circle | capsule
+    position: Vector
+    velocity: Vector
+    mass: Decimal
+    restitution: Decimal
+    is_grounded: Boolean
+    max_walkable_slope: Decimal
+
+    inverse_mass: if mass > 0: 1 / mass else: 0
+
+    -- Upward-facing surfaces whose slope is within max_walkable_slope count as walkable
+    is_walkable(normal): normal.y < 0 and abs(normal.x) <= max_walkable_slope * -normal.y
+}
+
+entity PhysicsWorld {
+    bodies: List<Body>
+}
+
+config {
+    max_walkable_slope_default: Decimal = 4
+}
+
+-- Stepping
+
+rule PhysicsStepped {
+    when: Step(dt)
+    requires: dt > 0
+
+    -- Every body falls under the world's gravity each step; grounding is re-established by contact
+    ensures:
+        for body in physics.bodies:
+            body.velocity.y = body.velocity.y + world.gravity * dt
+            body.position = body.position + body.velocity * dt
+            body.is_grounded = false
+}
+
+-- Terrain contact
+
+rule TerrainContactResolved {
+    when: TerrainContact(body, normal)
+
+    -- Bounce only when moving into the surface; restitution is the lower of body and terrain values
+    ensures:
+        if body.velocity.dot(normal) < 0:
+            body.velocity = body.velocity - (1 + min(body.restitution, world.terrain.restitution)) * body.velocity.dot(normal) * normal
+    -- A body is grounded when it touches any walkable surface
+    ensures:
+        if body.is_walkable(normal):
+            body.is_grounded = true
+}
+
+-- Body-to-body contact
+
+rule BodiesCollided {
+    when: BodiesOverlap(a, b, normal, penetration)
+    requires: a.mass > 0 or b.mass > 0
+
+    let relative_speed = (b.velocity - a.velocity).dot(normal)
+    let impulse = -(1 + min(a.restitution, b.restitution)) * relative_speed / (a.inverse_mass + b.inverse_mass)
+
+    -- Impulse is shared by inverse mass; a zero-mass body is immovable and does not move
+    ensures:
+        if relative_speed < 0:
+            a.velocity = a.velocity - impulse * a.inverse_mass * normal
+            b.velocity = b.velocity + impulse * b.inverse_mass * normal
+}
+
+-- Explosions
+
+-- Emitted by a weapon detonation alongside Explosion (world spec), sharing its centre and radius; force is chosen by the weapon
+rule ExplosionImpulseApplied {
+    when: ExplosionImpulse(centre, radius, force)
+    requires: radius > 0 and force > 0
+
+    -- Impulse falls off linearly with distance and is zero at the edge of the radius; zero-mass bodies are immovable
+    ensures:
+        for body in physics.bodies where body.mass > 0 and (body.position - centre).length_squared < radius * radius:
+            body.velocity = body.velocity + (body.position - centre).normalised * force * (1 - (body.position - centre).length / radius) * body.inverse_mass
+}

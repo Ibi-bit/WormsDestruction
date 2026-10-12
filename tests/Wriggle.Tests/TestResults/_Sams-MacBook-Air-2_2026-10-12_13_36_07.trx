@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="30cb4646-b7b7-484c-86fd-e5d9f67545b9" name="@Sams-MacBook-Air-2 2026-10-12 13:36:07" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-12T13:36:07.0458530+01:00" queuing="2026-10-12T13:36:07.0458530+01:00" start="2026-10-12T13:36:06.5198370+01:00" finish="2026-10-12T13:36:07.0660950+01:00" />
+  <TestSettings name="default" id="1f2b4878-e304-4a0e-b07b-4005a91fe59e">
+    <Deployment runDeploymentRoot="_Sams-MacBook-Air-2_2026-10-12_13_36_07" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2dd26bb9-0ead-4ddd-93e2-c6be080459a5" testId="8a3004b9-d2b3-90ea-6a7f-9b09ff20487b" testName="Wriggle.Tests.Specs.PhysicsSpecTests.PhysicsStepped_NoOpWhenDeltaNotPositive" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000974" startTime="2026-10-12T13:36:07.0119150+01:00" endTime="2026-10-12T13:36:07.0119150+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2dd26bb9-0ead-4ddd-93e2-c6be080459a5" />
+    <UnitTestResult executionId="2e41110f-9f19-4f6d-b1bf-9f5249af39ab" testId="01c06e3e-7ec2-0d7c-37e8-063451195505" testName="Wriggle.Tests.Specs.WorldSpecTests.PlayerJoins_AddsPlayerWithDisabledAmmoForEachWeapon" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000890" startTime="2026-10-12T13:36:07.0129320+01:00" endTime="2026-10-12T13:36:07.0129320+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2e41110f-9f19-4f6d-b1bf-9f5249af39ab" />
+    <UnitTestResult executionId="9c2a2fe1-1d8d-42cd-b113-3cf3472d7cd6" testId="e91e2401-48b9-e5a6-4d76-8f6c9b747d3e" testName="Wriggle.Tests.Specs.WorldSpecTests.AmmoGrant_TypeExists" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001535" startTime="2026-10-12T13:36:07.0130280+01:00" endTime="2026-10-12T13:36:07.0130280+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c2a2fe1-1d8d-42cd-b113-3cf3472d7cd6">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotNull() Failure</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.WorldSpecTests.AmmoGrant_TypeExists() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs:line 86
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="04c55143-81d8-427c-930c-277c5570591d" testId="ab84ab77-7175-120a-8eb9-5525367d36e1" testName="Wriggle.Tests.Specs.WorldSpecTests.RoundAmmoGranted_EnablesAmmoForThatRound" computerName="Sams-MacBook-Air-2" duration="00:00:00.0030034" startTime="2026-10-12T13:36:07.0126570+01:00" endTime="2026-10-12T13:36:07.0126570+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="04c55143-81d8-427c-930c-277c5570591d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure
+Expected: True
+Actual:   False</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.WorldSpecTests.RoundAmmoGranted_EnablesAmmoForThatRound() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs:line 188
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="07cbe463-bca1-4705-8a7d-f01510302ae3" testId="6fc13100-5340-6dd6-6311-39de502548cf" testName="Wriggle.Tests.Specs.PhysicsSpecTests.ExplosionImpulse_NoOpWhenRadiusNotPositive" computerName="Sams-MacBook-Air-2" duration="00:00:00.0009726" startTime="2026-10-12T13:36:07.0113090+01:00" endTime="2026-10-12T13:36:07.0113090+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="07cbe463-bca1-4705-8a7d-f01510302ae3" />
+    <UnitTestResult executionId="1a0350fe-3a62-402c-8cd8-de0b4907cef1" testId="3c6f8f33-b894-32a5-2577-9007557360ea" testName="Wriggle.Tests.Specs.WorldSpecTests.GameWorld_HasSpecFields" computerName="Sams-MacBook-Air-2" duration="00:00:00.0007161" startTime="2026-10-12T13:36:07.0112800+01:00" endTime="2026-10-12T13:36:07.0112800+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a0350fe-3a62-402c-8cd8-de0b4907cef1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure
+Expected: True
+Actual:   False</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.WorldSpecTests.GameWorld_HasSpecFields() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs:line 63
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="df4bbd0f-e1f3-46e9-8c79-ab01c6a113af" testId="94215191-0ac0-6fde-81fc-e21d78c4ee37" testName="Wriggle.Tests.Specs.WorldSpecTests.TerrainRestitution_DefaultIsQuarter" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000308" startTime="2026-10-12T13:36:07.0134360+01:00" endTime="2026-10-12T13:36:07.0134360+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df4bbd0f-e1f3-46e9-8c79-ab01c6a113af" />
+    <UnitTestResult executionId="b6b04396-ceb0-4ca8-8d08-5c355aeaf84e" testId="0e85e56e-0e35-aa96-515a-507149416ad8" testName="Wriggle.Tests.Specs.PhysicsSpecTests.PhysicsWorld_HasBodies" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000513" startTime="2026-10-12T13:36:07.0123260+01:00" endTime="2026-10-12T13:36:07.0123260+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6b04396-ceb0-4ca8-8d08-5c355aeaf84e" />
+    <UnitTestResult executionId="ab11e4df-a848-4684-922b-3e3fdbc7161a" testId="69a94cee-142d-2f65-ebf3-05e7ed53ae21" testName="Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenSwitchAlreadyQueued" computerName="Sams-MacBook-Air-2" duration="00:00:00.0002515" startTime="2026-10-12T13:36:07.0125230+01:00" endTime="2026-10-12T13:36:07.0125230+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ab11e4df-a848-4684-922b-3e3fdbc7161a">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsType() Failure
+Expected: Wriggle.Tests.Specs.CoreSpecTests+SceneB
+Actual:   Wriggle.Tests.Specs.CoreSpecTests+SceneA</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenSwitchAlreadyQueued() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/CoreSpecTests.cs:line 160
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7d316225-e0d6-497b-b868-6819fb1eaf15" testId="caeceb03-e846-edd5-ffd5-fe2623a5a54b" testName="Wriggle.Tests.Specs.PhysicsSpecTests.TerrainContact_BodyComesToRestOnFloorAndIsGrounded" computerName="Sams-MacBook-Air-2" duration="00:00:00.0031794" startTime="2026-10-12T13:36:06.9894290+01:00" endTime="2026-10-12T13:36:06.9894290+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7d316225-e0d6-497b-b868-6819fb1eaf15" />
+    <UnitTestResult executionId="020a8ebd-0008-43ee-a459-d5f330008414" testId="b9b34a19-5232-8888-c0df-f11a0f9b87bc" testName="Wriggle.Tests.Specs.CoreSpecTests.SwitchSceneApplied_ExitsOutgoingThenEntersTarget" computerName="Sams-MacBook-Air-2" duration="00:00:00.0033973" startTime="2026-10-12T13:36:06.9879680+01:00" endTime="2026-10-12T13:36:06.9879680+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="020a8ebd-0008-43ee-a459-d5f330008414" />
+    <UnitTestResult executionId="0527827f-616d-42a7-a94c-d812c60d43cf" testId="79112b81-b3d6-b9c0-1a18-a198a81c45d5" testName="Wriggle.Tests.Specs.CoreSpecTests.SwitchSceneApplied_NoOpWhenNothingPending" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001183" startTime="2026-10-12T13:36:07.0109930+01:00" endTime="2026-10-12T13:36:07.0109940+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0527827f-616d-42a7-a94c-d812c60d43cf" />
+    <UnitTestResult executionId="ea4eaa4d-0f86-4627-a1b3-49a4338275a2" testId="21c1f845-7192-6e71-3ad9-25c76ce89924" testName="Wriggle.Tests.Specs.PhysicsSpecTests.PhysicsStepped_AppliesGravityAndMovesBodies" computerName="Sams-MacBook-Air-2" duration="00:00:00.0002910" startTime="2026-10-12T13:36:07.0120880+01:00" endTime="2026-10-12T13:36:07.0120880+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ea4eaa4d-0f86-4627-a1b3-49a4338275a2" />
+    <UnitTestResult executionId="dca70cbe-2d61-423b-a8ea-6155cd14e766" testId="3e682d3e-acb8-4a8a-6828-4932073dbb43" testName="Wriggle.Tests.Specs.CoreSpecTests.SceneSwitchRequested_QueuesTargetWithoutChangingCurrent" computerName="Sams-MacBook-Air-2" duration="00:00:00.0004310" startTime="2026-10-12T13:36:07.0123910+01:00" endTime="2026-10-12T13:36:07.0123910+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dca70cbe-2d61-423b-a8ea-6155cd14e766" />
+    <UnitTestResult executionId="37ca5388-096f-479e-8775-1df7da1d5c68" testId="99175b2e-6c11-be12-a479-f55ae1c37bd7" testName="Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_RebuildsCurrentSceneOnNextApply" computerName="Sams-MacBook-Air-2" duration="00:00:00.0008951" startTime="2026-10-12T13:36:07.0113470+01:00" endTime="2026-10-12T13:36:07.0113470+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="37ca5388-096f-479e-8775-1df7da1d5c68" />
+    <UnitTestResult executionId="4aea718f-0c5c-4126-a56e-0711ae46e318" testId="a17614b5-a308-2eb1-5a44-0724c759b67a" testName="Wriggle.Tests.Specs.CoreSpecTests.Pending_IsNullWhenNothingQueued_AndSetWhenQueued" computerName="Sams-MacBook-Air-2" duration="00:00:00.0003146" startTime="2026-10-12T13:36:07.0123100+01:00" endTime="2026-10-12T13:36:07.0123100+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4aea718f-0c5c-4126-a56e-0711ae46e318" />
+    <UnitTestResult executionId="2e9c80ce-4348-48fc-9955-9394c65e672e" testId="e07d68ee-7966-ec3b-446f-1608d8baac09" testName="Wriggle.Tests.Specs.WorldSpecTests.Ammo_HasPlayerWeaponAndEnabled" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001614" startTime="2026-10-12T13:36:07.0134160+01:00" endTime="2026-10-12T13:36:07.0134160+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2e9c80ce-4348-48fc-9955-9394c65e672e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure
+Expected: True
+Actual:   False</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.WorldSpecTests.Ammo_HasPlayerWeaponAndEnabled() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs:line 71
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e0173381-d1da-4a32-9e32-9878613e42ef" testId="69ee43fa-bf7f-7a34-fd04-b36372a38034" testName="Wriggle.Tests.Specs.WorldSpecTests.AdvanceTurn_MovesToNextPlayerAndWraps" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000699" startTime="2026-10-12T13:36:07.0128980+01:00" endTime="2026-10-12T13:36:07.0128980+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e0173381-d1da-4a32-9e32-9878613e42ef" />
+    <UnitTestResult executionId="9fb862a5-7a9c-4c07-ac5a-05b65f20cd7e" testId="318f8825-c1a9-5dac-36dd-31b0dff81464" testName="Wriggle.Tests.Specs.WorldSpecTests.TerrainRestitution_ClampsToMaximumOne" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000676" startTime="2026-10-12T13:36:07.0113820+01:00" endTime="2026-10-12T13:36:07.0113820+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9fb862a5-7a9c-4c07-ac5a-05b65f20cd7e" />
+    <UnitTestResult executionId="94996ad3-2fae-46b6-8d19-f1765f129cf8" testId="58edf57d-1d51-4b7e-fe82-40a79f4a50f4" testName="Wriggle.Tests.Specs.PhysicsSpecTests.CapsuleBody_DefaultWalkableSlopeIsFour" computerName="Sams-MacBook-Air-2" duration="00:00:00.0002098" startTime="2026-10-12T13:36:07.0121060+01:00" endTime="2026-10-12T13:36:07.0121060+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="94996ad3-2fae-46b6-8d19-f1765f129cf8" />
+    <UnitTestResult executionId="5395e9cc-879a-4f1f-9622-848096bebbfa" testId="b129aae8-ee6c-d004-244e-498cf6586f2c" testName="Wriggle.Tests.Specs.WorldSpecTests.ResetTurnOrder_ReturnsToFirstPlayer" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001718" startTime="2026-10-12T13:36:07.0126780+01:00" endTime="2026-10-12T13:36:07.0126780+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5395e9cc-879a-4f1f-9622-848096bebbfa" />
+    <UnitTestResult executionId="3a743051-c68a-405f-93af-2e4726595118" testId="b373a1e5-72b3-38ed-f228-878a49448549" testName="Wriggle.Tests.Specs.CoreSpecTests.Scene_HasStatus" computerName="Sams-MacBook-Air-2" duration="00:00:00.0004854" startTime="2026-10-12T13:36:06.9946640+01:00" endTime="2026-10-12T13:36:06.9946640+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a743051-c68a-405f-93af-2e4726595118">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotNull() Failure</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.CoreSpecTests.Scene_HasStatus() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/CoreSpecTests.cs:line 50
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="906ddcaf-2216-4ad2-b3d4-dadd42f42fac" testId="28413ffe-88b9-b65d-4ffd-78778a9fccfe" testName="Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenNoCurrentScene" computerName="Sams-MacBook-Air-2" duration="00:00:00.0007821" startTime="2026-10-12T13:36:07.0123560+01:00" endTime="2026-10-12T13:36:07.0123560+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="906ddcaf-2216-4ad2-b3d4-dadd42f42fac" />
+    <UnitTestResult executionId="e1492c3d-5021-4e31-96df-341d533dccbe" testId="0005fd44-8998-b208-e82f-012c784fb036" testName="Wriggle.Tests.Specs.WorldSpecTests.WeaponDefined_AddsWeaponToWorld" computerName="Sams-MacBook-Air-2" duration="00:00:00.0006960" startTime="2026-10-12T13:36:07.0113280+01:00" endTime="2026-10-12T13:36:07.0113280+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e1492c3d-5021-4e31-96df-341d533dccbe" />
+    <UnitTestResult executionId="43cf8556-4131-4881-a61b-2c5f6d5914b0" testId="ab222ee4-1c52-92df-1f72-06de2a613a5b" testName="Wriggle.Tests.Specs.WorldSpecTests.Colour_HasRgbaComponents" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000997" startTime="2026-10-12T13:36:07.0129150+01:00" endTime="2026-10-12T13:36:07.0129150+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43cf8556-4131-4881-a61b-2c5f6d5914b0" />
+    <UnitTestResult executionId="d8bc335b-c295-48d9-a4e7-b397daa3a57e" testId="2958afc9-139c-2610-4740-83daa89ffbcd" testName="Wriggle.Tests.Specs.PhysicsSpecTests.Body_HasSpecFields" computerName="Sams-MacBook-Air-2" duration="00:00:00.0003494" startTime="2026-10-12T13:36:06.9944210+01:00" endTime="2026-10-12T13:36:06.9944210+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d8bc335b-c295-48d9-a4e7-b397daa3a57e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure
+Expected: True
+Actual:   False</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.PhysicsSpecTests.Body_HasSpecFields() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/PhysicsSpecTests.cs:line 53
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6c3c15a9-9511-45e9-8074-7445269e3b7e" testId="f43d8af7-3063-f5da-b101-01cdac5eb332" testName="Wriggle.Tests.Specs.CoreSpecTests.Current_IsNullUntilFirstSwitchThenSet" computerName="Sams-MacBook-Air-2" duration="00:00:00.0003124" startTime="2026-10-12T13:36:07.0120710+01:00" endTime="2026-10-12T13:36:07.0120710+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c3c15a9-9511-45e9-8074-7445269e3b7e" />
+    <UnitTestResult executionId="6ef2c9e2-27ad-4e48-aa8a-7503359cc3fd" testId="942af6a8-02c1-c5a3-1226-4f18036ed33e" testName="Wriggle.Tests.Specs.WorldSpecTests.Terrain_HasWidthHeightAndRestitution" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000668" startTime="2026-10-12T13:36:07.0130820+01:00" endTime="2026-10-12T13:36:07.0130820+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6ef2c9e2-27ad-4e48-aa8a-7503359cc3fd" />
+    <UnitTestResult executionId="e04c3761-6912-433b-9fbc-c67d650ad3c4" testId="5cb7e458-6a5b-75b4-d111-e67aed7e2d8d" testName="Wriggle.Tests.Specs.WorldSpecTests.WeaponInventoryUpdated_GivesExistingPlayersMissingAmmo" computerName="Sams-MacBook-Air-2" duration="00:00:00.0002481" startTime="2026-10-12T13:36:07.0128790+01:00" endTime="2026-10-12T13:36:07.0128790+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e04c3761-6912-433b-9fbc-c67d650ad3c4" />
+    <UnitTestResult executionId="e9105ca5-6017-4cd1-869c-699342ef2301" testId="d44ab003-81cd-e3f8-bd8d-34c113467bb3" testName="Wriggle.Tests.Specs.WorldSpecTests.StartNextRound_IncrementsRoundAndGrantsThatRound" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001982" startTime="2026-10-12T13:36:07.0130650+01:00" endTime="2026-10-12T13:36:07.0130650+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9105ca5-6017-4cd1-869c-699342ef2301" />
+    <UnitTestResult executionId="ecd3edfe-c268-44be-8a22-d1cc39ddf57d" testId="74b220f2-8768-2882-9b03-a65552865097" testName="Wriggle.Tests.Specs.WorldSpecTests.RestitutionSet_SetsTerrainRestitution" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000357" startTime="2026-10-12T13:36:07.0132860+01:00" endTime="2026-10-12T13:36:07.0132860+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ecd3edfe-c268-44be-8a22-d1cc39ddf57d" />
+    <UnitTestResult executionId="aa591d7d-427d-4fa6-b254-8a1fe8c7a266" testId="f94f966a-f14e-538a-b332-23e000b4bc0f" testName="Wriggle.Tests.Specs.PhysicsSpecTests.BodiesCollided_NoOpWhenBothBodiesImmovable" computerName="Sams-MacBook-Air-2" duration="00:00:00.0024629" startTime="2026-10-12T13:36:06.9878370+01:00" endTime="2026-10-12T13:36:06.9878370+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa591d7d-427d-4fa6-b254-8a1fe8c7a266" />
+    <UnitTestResult executionId="016fedde-58a4-46b9-91d4-e2c12d052d50" testId="a60347ab-2d2e-62bc-3167-86c75e804056" testName="Wriggle.Tests.Specs.PhysicsSpecTests.ExplosionImpulse_FallsOffLinearlyWithDistance" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000768" startTime="2026-10-12T13:36:07.0123480+01:00" endTime="2026-10-12T13:36:07.0123480+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="016fedde-58a4-46b9-91d4-e2c12d052d50" />
+    <UnitTestResult executionId="15eabdf0-db26-4d45-aef9-b7c0ccd88fef" testId="8b20b96c-92f7-81f7-47ab-23306d84dba1" testName="Wriggle.Tests.Specs.WorldSpecTests.Colour_HasStructuralEquality" computerName="Sams-MacBook-Air-2" duration="00:00:00.0024903" startTime="2026-10-12T13:36:06.9865210+01:00" endTime="2026-10-12T13:36:06.9865320+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15eabdf0-db26-4d45-aef9-b7c0ccd88fef" />
+    <UnitTestResult executionId="55486f3f-a065-4082-9d20-b86a73bd3117" testId="b0d183e2-d6ef-bd31-32f6-8ab819240b1d" testName="Wriggle.Tests.Specs.WorldSpecTests.AdvanceTurn_NoOpWithoutPlayers" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000353" startTime="2026-10-12T13:36:07.0130990+01:00" endTime="2026-10-12T13:36:07.0130990+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55486f3f-a065-4082-9d20-b86a73bd3117" />
+    <UnitTestResult executionId="ac366df0-d4c1-4c7a-965a-2f07f931dd3f" testId="5a71dd9d-f5a8-0715-9f72-b3bd7e1d07db" testName="Wriggle.Tests.Specs.CoreSpecTests.SceneManager_HasCurrentAndPending" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000807" startTime="2026-10-12T13:36:07.0118960+01:00" endTime="2026-10-12T13:36:07.0118960+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac366df0-d4c1-4c7a-965a-2f07f931dd3f" />
+    <UnitTestResult executionId="a71c87dd-88e2-4b7b-9cb9-b35549cdb47d" testId="7c436d8d-fb3d-1d16-0638-5247a31d8adc" testName="Wriggle.Tests.Specs.PhysicsSpecTests.BodiesCollided_TransfersMomentumBetweenTouchingBodies" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000763" startTime="2026-10-12T13:36:06.9895650+01:00" endTime="2026-10-12T13:36:06.9895650+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a71c87dd-88e2-4b7b-9cb9-b35549cdb47d" />
+    <UnitTestResult executionId="6e88dd9b-7420-4881-a664-7e80ab354175" testId="f4d83700-6d1e-a1e1-f953-ca5545225657" testName="Wriggle.Tests.Specs.WorldSpecTests.TerrainRestitution_ClampsToMinimumZero" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000392" startTime="2026-10-12T13:36:07.0133040+01:00" endTime="2026-10-12T13:36:07.0133040+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e88dd9b-7420-4881-a664-7e80ab354175" />
+    <UnitTestResult executionId="d322bd03-c81e-4aee-830b-bf27e57626e6" testId="4e45f084-3cb8-b176-f21d-97cadc8e94b0" testName="Wriggle.Tests.Specs.WorldSpecTests.Gravity_DefaultIs600" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000773" startTime="2026-10-12T13:36:07.0130480+01:00" endTime="2026-10-12T13:36:07.0130480+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d322bd03-c81e-4aee-830b-bf27e57626e6" />
+    <UnitTestResult executionId="2ea349f1-967f-4ba2-aa6a-662ce401975c" testId="8d9b7a28-5b1c-366d-189d-4e3af5b36f86" testName="Wriggle.Tests.Specs.CoreSpecTests.GameStarted_ActivatesTheStartingScene" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001564" startTime="2026-10-12T13:36:07.0125460+01:00" endTime="2026-10-12T13:36:07.0125460+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ea349f1-967f-4ba2-aa6a-662ce401975c" />
+    <UnitTestResult executionId="255b7377-f9b7-47c4-969d-ad4be6aa414f" testId="6cf002ad-18b8-debe-1a62-6c2fca490533" testName="Wriggle.Tests.Specs.WorldSpecTests.WeaponGrant_TypeExists" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001941" startTime="2026-10-12T13:36:07.0120490+01:00" endTime="2026-10-12T13:36:07.0120490+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="255b7377-f9b7-47c4-969d-ad4be6aa414f">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotNull() Failure</Message>
+          <StackTrace>   at Wriggle.Tests.Specs.WorldSpecTests.WeaponGrant_TypeExists() in /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs:line 79
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="310f881c-6081-4728-bb20-5f9bdc941bb9" testId="21cb66c7-89fd-eb57-c355-e4c0be0c60bb" testName="Wriggle.Tests.Specs.PhysicsSpecTests.Vector_HasXYAndLengthSquared" computerName="Sams-MacBook-Air-2" duration="00:00:00.0001685" startTime="2026-10-12T13:36:07.0119330+01:00" endTime="2026-10-12T13:36:07.0119330+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="310f881c-6081-4728-bb20-5f9bdc941bb9" />
+    <UnitTestResult executionId="b6fca3df-04ec-4f6f-a263-3ccfd3638e29" testId="81c007f6-14e3-2472-ea33-27f4bba155f9" testName="Wriggle.Tests.Specs.PhysicsSpecTests.Vector_HasStructuralEquality" computerName="Sams-MacBook-Air-2" duration="00:00:00.0000492" startTime="2026-10-12T13:36:07.0113600+01:00" endTime="2026-10-12T13:36:07.0113600+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6fca3df-04ec-4f6f-a263-3ccfd3638e29" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.WeaponInventoryUpdated_GivesExistingPlayersMissingAmmo" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="5cb7e458-6a5b-75b4-d111-e67aed7e2d8d">
+      <Execution id="e04c3761-6912-433b-9fbc-c67d650ad3c4" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="WeaponInventoryUpdated_GivesExistingPlayersMissingAmmo" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.Colour_HasRgbaComponents" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="ab222ee4-1c52-92df-1f72-06de2a613a5b">
+      <Execution id="43cf8556-4131-4881-a61b-2c5f6d5914b0" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="Colour_HasRgbaComponents" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.SceneManager_HasCurrentAndPending" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="5a71dd9d-f5a8-0715-9f72-b3bd7e1d07db">
+      <Execution id="ac366df0-d4c1-4c7a-965a-2f07f931dd3f" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="SceneManager_HasCurrentAndPending" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.AdvanceTurn_NoOpWithoutPlayers" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="b0d183e2-d6ef-bd31-32f6-8ab819240b1d">
+      <Execution id="55486f3f-a065-4082-9d20-b86a73bd3117" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="AdvanceTurn_NoOpWithoutPlayers" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.Vector_HasStructuralEquality" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="81c007f6-14e3-2472-ea33-27f4bba155f9">
+      <Execution id="b6fca3df-04ec-4f6f-a263-3ccfd3638e29" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="Vector_HasStructuralEquality" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.AmmoGrant_TypeExists" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="e91e2401-48b9-e5a6-4d76-8f6c9b747d3e">
+      <Execution id="9c2a2fe1-1d8d-42cd-b113-3cf3472d7cd6" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="AmmoGrant_TypeExists" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.Colour_HasStructuralEquality" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="8b20b96c-92f7-81f7-47ab-23306d84dba1">
+      <Execution id="15eabdf0-db26-4d45-aef9-b7c0ccd88fef" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="Colour_HasStructuralEquality" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.GameWorld_HasSpecFields" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="3c6f8f33-b894-32a5-2577-9007557360ea">
+      <Execution id="1a0350fe-3a62-402c-8cd8-de0b4907cef1" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="GameWorld_HasSpecFields" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.ResetTurnOrder_ReturnsToFirstPlayer" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="b129aae8-ee6c-d004-244e-498cf6586f2c">
+      <Execution id="5395e9cc-879a-4f1f-9622-848096bebbfa" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="ResetTurnOrder_ReturnsToFirstPlayer" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.BodiesCollided_NoOpWhenBothBodiesImmovable" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="f94f966a-f14e-538a-b332-23e000b4bc0f">
+      <Execution id="aa591d7d-427d-4fa6-b254-8a1fe8c7a266" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="BodiesCollided_NoOpWhenBothBodiesImmovable" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenNoCurrentScene" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="28413ffe-88b9-b65d-4ffd-78778a9fccfe">
+      <Execution id="906ddcaf-2216-4ad2-b3d4-dadd42f42fac" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="RestartCurrentScene_IgnoredWhenNoCurrentScene" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.Vector_HasXYAndLengthSquared" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="21cb66c7-89fd-eb57-c355-e4c0be0c60bb">
+      <Execution id="310f881c-6081-4728-bb20-5f9bdc941bb9" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="Vector_HasXYAndLengthSquared" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.PhysicsStepped_NoOpWhenDeltaNotPositive" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="8a3004b9-d2b3-90ea-6a7f-9b09ff20487b">
+      <Execution id="2dd26bb9-0ead-4ddd-93e2-c6be080459a5" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="PhysicsStepped_NoOpWhenDeltaNotPositive" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.Scene_HasStatus" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="b373a1e5-72b3-38ed-f228-878a49448549">
+      <Execution id="3a743051-c68a-405f-93af-2e4726595118" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="Scene_HasStatus" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.TerrainContact_BodyComesToRestOnFloorAndIsGrounded" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="caeceb03-e846-edd5-ffd5-fe2623a5a54b">
+      <Execution id="7d316225-e0d6-497b-b868-6819fb1eaf15" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="TerrainContact_BodyComesToRestOnFloorAndIsGrounded" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.RoundAmmoGranted_EnablesAmmoForThatRound" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="ab84ab77-7175-120a-8eb9-5525367d36e1">
+      <Execution id="04c55143-81d8-427c-930c-277c5570591d" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="RoundAmmoGranted_EnablesAmmoForThatRound" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.GameStarted_ActivatesTheStartingScene" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="8d9b7a28-5b1c-366d-189d-4e3af5b36f86">
+      <Execution id="2ea349f1-967f-4ba2-aa6a-662ce401975c" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="GameStarted_ActivatesTheStartingScene" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.Terrain_HasWidthHeightAndRestitution" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="942af6a8-02c1-c5a3-1226-4f18036ed33e">
+      <Execution id="6ef2c9e2-27ad-4e48-aa8a-7503359cc3fd" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="Terrain_HasWidthHeightAndRestitution" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.BodiesCollided_TransfersMomentumBetweenTouchingBodies" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="7c436d8d-fb3d-1d16-0638-5247a31d8adc">
+      <Execution id="a71c87dd-88e2-4b7b-9cb9-b35549cdb47d" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="BodiesCollided_TransfersMomentumBetweenTouchingBodies" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.PhysicsStepped_AppliesGravityAndMovesBodies" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="21c1f845-7192-6e71-3ad9-25c76ce89924">
+      <Execution id="ea4eaa4d-0f86-4627-a1b3-49a4338275a2" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="PhysicsStepped_AppliesGravityAndMovesBodies" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.RestitutionSet_SetsTerrainRestitution" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="74b220f2-8768-2882-9b03-a65552865097">
+      <Execution id="ecd3edfe-c268-44be-8a22-d1cc39ddf57d" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="RestitutionSet_SetsTerrainRestitution" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenSwitchAlreadyQueued" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="69a94cee-142d-2f65-ebf3-05e7ed53ae21">
+      <Execution id="ab11e4df-a848-4684-922b-3e3fdbc7161a" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="RestartCurrentScene_IgnoredWhenSwitchAlreadyQueued" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.Pending_IsNullWhenNothingQueued_AndSetWhenQueued" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="a17614b5-a308-2eb1-5a44-0724c759b67a">
+      <Execution id="4aea718f-0c5c-4126-a56e-0711ae46e318" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="Pending_IsNullWhenNothingQueued_AndSetWhenQueued" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.SwitchSceneApplied_NoOpWhenNothingPending" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="79112b81-b3d6-b9c0-1a18-a198a81c45d5">
+      <Execution id="0527827f-616d-42a7-a94c-d812c60d43cf" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="SwitchSceneApplied_NoOpWhenNothingPending" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.Body_HasSpecFields" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="2958afc9-139c-2610-4740-83daa89ffbcd">
+      <Execution id="d8bc335b-c295-48d9-a4e7-b397daa3a57e" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="Body_HasSpecFields" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.WeaponGrant_TypeExists" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="6cf002ad-18b8-debe-1a62-6c2fca490533">
+      <Execution id="255b7377-f9b7-47c4-969d-ad4be6aa414f" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="WeaponGrant_TypeExists" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.Ammo_HasPlayerWeaponAndEnabled" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="e07d68ee-7966-ec3b-446f-1608d8baac09">
+      <Execution id="2e9c80ce-4348-48fc-9955-9394c65e672e" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="Ammo_HasPlayerWeaponAndEnabled" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.Gravity_DefaultIs600" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="4e45f084-3cb8-b176-f21d-97cadc8e94b0">
+      <Execution id="d322bd03-c81e-4aee-830b-bf27e57626e6" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="Gravity_DefaultIs600" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_RebuildsCurrentSceneOnNextApply" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="99175b2e-6c11-be12-a479-f55ae1c37bd7">
+      <Execution id="37ca5388-096f-479e-8775-1df7da1d5c68" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="RestartCurrentScene_RebuildsCurrentSceneOnNextApply" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.Current_IsNullUntilFirstSwitchThenSet" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="f43d8af7-3063-f5da-b101-01cdac5eb332">
+      <Execution id="6c3c15a9-9511-45e9-8074-7445269e3b7e" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="Current_IsNullUntilFirstSwitchThenSet" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.PhysicsWorld_HasBodies" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="0e85e56e-0e35-aa96-515a-507149416ad8">
+      <Execution id="b6b04396-ceb0-4ca8-8d08-5c355aeaf84e" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="PhysicsWorld_HasBodies" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.TerrainRestitution_ClampsToMinimumZero" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="f4d83700-6d1e-a1e1-f953-ca5545225657">
+      <Execution id="6e88dd9b-7420-4881-a664-7e80ab354175" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="TerrainRestitution_ClampsToMinimumZero" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.StartNextRound_IncrementsRoundAndGrantsThatRound" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="d44ab003-81cd-e3f8-bd8d-34c113467bb3">
+      <Execution id="e9105ca5-6017-4cd1-869c-699342ef2301" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="StartNextRound_IncrementsRoundAndGrantsThatRound" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.AdvanceTurn_MovesToNextPlayerAndWraps" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="69ee43fa-bf7f-7a34-fd04-b36372a38034">
+      <Execution id="e0173381-d1da-4a32-9e32-9878613e42ef" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="AdvanceTurn_MovesToNextPlayerAndWraps" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.TerrainRestitution_DefaultIsQuarter" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="94215191-0ac0-6fde-81fc-e21d78c4ee37">
+      <Execution id="df4bbd0f-e1f3-46e9-8c79-ab01c6a113af" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="TerrainRestitution_DefaultIsQuarter" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.SwitchSceneApplied_ExitsOutgoingThenEntersTarget" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="b9b34a19-5232-8888-c0df-f11a0f9b87bc">
+      <Execution id="020a8ebd-0008-43ee-a459-d5f330008414" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="SwitchSceneApplied_ExitsOutgoingThenEntersTarget" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.ExplosionImpulse_FallsOffLinearlyWithDistance" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="a60347ab-2d2e-62bc-3167-86c75e804056">
+      <Execution id="016fedde-58a4-46b9-91d4-e2c12d052d50" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="ExplosionImpulse_FallsOffLinearlyWithDistance" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.ExplosionImpulse_NoOpWhenRadiusNotPositive" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="6fc13100-5340-6dd6-6311-39de502548cf">
+      <Execution id="07cbe463-bca1-4705-8a7d-f01510302ae3" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="ExplosionImpulse_NoOpWhenRadiusNotPositive" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.PlayerJoins_AddsPlayerWithDisabledAmmoForEachWeapon" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="01c06e3e-7ec2-0d7c-37e8-063451195505">
+      <Execution id="2e41110f-9f19-4f6d-b1bf-9f5249af39ab" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="PlayerJoins_AddsPlayerWithDisabledAmmoForEachWeapon" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.PhysicsSpecTests.CapsuleBody_DefaultWalkableSlopeIsFour" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="58edf57d-1d51-4b7e-fe82-40a79f4a50f4">
+      <Execution id="94996ad3-2fae-46b6-8d19-f1765f129cf8" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.PhysicsSpecTests" name="CapsuleBody_DefaultWalkableSlopeIsFour" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.WeaponDefined_AddsWeaponToWorld" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="0005fd44-8998-b208-e82f-012c784fb036">
+      <Execution id="e1492c3d-5021-4e31-96df-341d533dccbe" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="WeaponDefined_AddsWeaponToWorld" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.CoreSpecTests.SceneSwitchRequested_QueuesTargetWithoutChangingCurrent" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="3e682d3e-acb8-4a8a-6828-4932073dbb43">
+      <Execution id="dca70cbe-2d61-423b-a8ea-6155cd14e766" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.CoreSpecTests" name="SceneSwitchRequested_QueuesTargetWithoutChangingCurrent" />
+    </UnitTest>
+    <UnitTest name="Wriggle.Tests.Specs.WorldSpecTests.TerrainRestitution_ClampsToMaximumOne" storage="/users/sampartington/wormsdestruction/tests/wriggle.tests/bin/debug/net8.0/wriggle.tests.dll" id="318f8825-c1a9-5dac-36dd-31b0dff81464">
+      <Execution id="9fb862a5-7a9c-4c07-ac5a-05b65f20cd7e" />
+      <TestMethod codeBase="/Users/sampartington/WormsDestruction/tests/Wriggle.Tests/bin/Debug/net8.0/Wriggle.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Wriggle.Tests.Specs.WorldSpecTests" name="TerrainRestitution_ClampsToMaximumOne" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="8a3004b9-d2b3-90ea-6a7f-9b09ff20487b" executionId="2dd26bb9-0ead-4ddd-93e2-c6be080459a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="01c06e3e-7ec2-0d7c-37e8-063451195505" executionId="2e41110f-9f19-4f6d-b1bf-9f5249af39ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e91e2401-48b9-e5a6-4d76-8f6c9b747d3e" executionId="9c2a2fe1-1d8d-42cd-b113-3cf3472d7cd6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab84ab77-7175-120a-8eb9-5525367d36e1" executionId="04c55143-81d8-427c-930c-277c5570591d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6fc13100-5340-6dd6-6311-39de502548cf" executionId="07cbe463-bca1-4705-8a7d-f01510302ae3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c6f8f33-b894-32a5-2577-9007557360ea" executionId="1a0350fe-3a62-402c-8cd8-de0b4907cef1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="94215191-0ac0-6fde-81fc-e21d78c4ee37" executionId="df4bbd0f-e1f3-46e9-8c79-ab01c6a113af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0e85e56e-0e35-aa96-515a-507149416ad8" executionId="b6b04396-ceb0-4ca8-8d08-5c355aeaf84e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="69a94cee-142d-2f65-ebf3-05e7ed53ae21" executionId="ab11e4df-a848-4684-922b-3e3fdbc7161a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="caeceb03-e846-edd5-ffd5-fe2623a5a54b" executionId="7d316225-e0d6-497b-b868-6819fb1eaf15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b9b34a19-5232-8888-c0df-f11a0f9b87bc" executionId="020a8ebd-0008-43ee-a459-d5f330008414" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="79112b81-b3d6-b9c0-1a18-a198a81c45d5" executionId="0527827f-616d-42a7-a94c-d812c60d43cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="21c1f845-7192-6e71-3ad9-25c76ce89924" executionId="ea4eaa4d-0f86-4627-a1b3-49a4338275a2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3e682d3e-acb8-4a8a-6828-4932073dbb43" executionId="dca70cbe-2d61-423b-a8ea-6155cd14e766" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="99175b2e-6c11-be12-a479-f55ae1c37bd7" executionId="37ca5388-096f-479e-8775-1df7da1d5c68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a17614b5-a308-2eb1-5a44-0724c759b67a" executionId="4aea718f-0c5c-4126-a56e-0711ae46e318" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e07d68ee-7966-ec3b-446f-1608d8baac09" executionId="2e9c80ce-4348-48fc-9955-9394c65e672e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="69ee43fa-bf7f-7a34-fd04-b36372a38034" executionId="e0173381-d1da-4a32-9e32-9878613e42ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="318f8825-c1a9-5dac-36dd-31b0dff81464" executionId="9fb862a5-7a9c-4c07-ac5a-05b65f20cd7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="58edf57d-1d51-4b7e-fe82-40a79f4a50f4" executionId="94996ad3-2fae-46b6-8d19-f1765f129cf8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b129aae8-ee6c-d004-244e-498cf6586f2c" executionId="5395e9cc-879a-4f1f-9622-848096bebbfa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b373a1e5-72b3-38ed-f228-878a49448549" executionId="3a743051-c68a-405f-93af-2e4726595118" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="28413ffe-88b9-b65d-4ffd-78778a9fccfe" executionId="906ddcaf-2216-4ad2-b3d4-dadd42f42fac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0005fd44-8998-b208-e82f-012c784fb036" executionId="e1492c3d-5021-4e31-96df-341d533dccbe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab222ee4-1c52-92df-1f72-06de2a613a5b" executionId="43cf8556-4131-4881-a61b-2c5f6d5914b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2958afc9-139c-2610-4740-83daa89ffbcd" executionId="d8bc335b-c295-48d9-a4e7-b397daa3a57e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f43d8af7-3063-f5da-b101-01cdac5eb332" executionId="6c3c15a9-9511-45e9-8074-7445269e3b7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="942af6a8-02c1-c5a3-1226-4f18036ed33e" executionId="6ef2c9e2-27ad-4e48-aa8a-7503359cc3fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5cb7e458-6a5b-75b4-d111-e67aed7e2d8d" executionId="e04c3761-6912-433b-9fbc-c67d650ad3c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d44ab003-81cd-e3f8-bd8d-34c113467bb3" executionId="e9105ca5-6017-4cd1-869c-699342ef2301" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="74b220f2-8768-2882-9b03-a65552865097" executionId="ecd3edfe-c268-44be-8a22-d1cc39ddf57d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f94f966a-f14e-538a-b332-23e000b4bc0f" executionId="aa591d7d-427d-4fa6-b254-8a1fe8c7a266" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a60347ab-2d2e-62bc-3167-86c75e804056" executionId="016fedde-58a4-46b9-91d4-e2c12d052d50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b20b96c-92f7-81f7-47ab-23306d84dba1" executionId="15eabdf0-db26-4d45-aef9-b7c0ccd88fef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b0d183e2-d6ef-bd31-32f6-8ab819240b1d" executionId="55486f3f-a065-4082-9d20-b86a73bd3117" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5a71dd9d-f5a8-0715-9f72-b3bd7e1d07db" executionId="ac366df0-d4c1-4c7a-965a-2f07f931dd3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7c436d8d-fb3d-1d16-0638-5247a31d8adc" executionId="a71c87dd-88e2-4b7b-9cb9-b35549cdb47d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4d83700-6d1e-a1e1-f953-ca5545225657" executionId="6e88dd9b-7420-4881-a664-7e80ab354175" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e45f084-3cb8-b176-f21d-97cadc8e94b0" executionId="d322bd03-c81e-4aee-830b-bf27e57626e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8d9b7a28-5b1c-366d-189d-4e3af5b36f86" executionId="2ea349f1-967f-4ba2-aa6a-662ce401975c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6cf002ad-18b8-debe-1a62-6c2fca490533" executionId="255b7377-f9b7-47c4-969d-ad4be6aa414f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="21cb66c7-89fd-eb57-c355-e4c0be0c60bb" executionId="310f881c-6081-4728-bb20-5f9bdc941bb9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="81c007f6-14e3-2472-ea33-27f4bba155f9" executionId="b6fca3df-04ec-4f6f-a263-3ccfd3638e29" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="43" executed="43" passed="35" failed="8" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.4.5+1caef2f33e (64-bit .NET 8.0.20)
+[xUnit.net 00:00:00.17]   Discovering: Wriggle.Tests
+[xUnit.net 00:00:00.19]   Discovered:  Wriggle.Tests
+[xUnit.net 00:00:00.19]   Starting:    Wriggle.Tests
+[xUnit.net 00:00:00.22]       Assert.True() Failure
+[xUnit.net 00:00:00.22]       Expected: True
+[xUnit.net 00:00:00.22]       Actual:   False
+[xUnit.net 00:00:00.22]       Stack Trace:
+[xUnit.net 00:00:00.22]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/PhysicsSpecTests.cs(53,0): at Wriggle.Tests.Specs.PhysicsSpecTests.Body_HasSpecFields()
+[xUnit.net 00:00:00.22]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.22]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.22]       Assert.NotNull() Failure
+[xUnit.net 00:00:00.22]       Stack Trace:
+[xUnit.net 00:00:00.22]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/CoreSpecTests.cs(50,0): at Wriggle.Tests.Specs.CoreSpecTests.Scene_HasStatus()
+[xUnit.net 00:00:00.22]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.22]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]       Assert.True() Failure
+[xUnit.net 00:00:00.24]       Expected: True
+[xUnit.net 00:00:00.24]       Actual:   False
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs(63,0): at Wriggle.Tests.Specs.WorldSpecTests.GameWorld_HasSpecFields()
+[xUnit.net 00:00:00.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]       Assert.NotNull() Failure
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs(79,0): at Wriggle.Tests.Specs.WorldSpecTests.WeaponGrant_TypeExists()
+[xUnit.net 00:00:00.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]       Assert.IsType() Failure
+[xUnit.net 00:00:00.24]       Expected: Wriggle.Tests.Specs.CoreSpecTests+SceneB
+[xUnit.net 00:00:00.24]       Actual:   Wriggle.Tests.Specs.CoreSpecTests+SceneA
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/CoreSpecTests.cs(160,0): at Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenSwitchAlreadyQueued()
+[xUnit.net 00:00:00.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]       Assert.True() Failure
+[xUnit.net 00:00:00.24]       Expected: True
+[xUnit.net 00:00:00.24]       Actual:   False
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs(188,0): at Wriggle.Tests.Specs.WorldSpecTests.RoundAmmoGranted_EnablesAmmoForThatRound()
+[xUnit.net 00:00:00.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]       Assert.NotNull() Failure
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs(86,0): at Wriggle.Tests.Specs.WorldSpecTests.AmmoGrant_TypeExists()
+[xUnit.net 00:00:00.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]       Assert.True() Failure
+[xUnit.net 00:00:00.24]       Expected: True
+[xUnit.net 00:00:00.24]       Actual:   False
+[xUnit.net 00:00:00.24]       Stack Trace:
+[xUnit.net 00:00:00.24]         /Users/sampartington/WormsDestruction/tests/Wriggle.Tests/Specs/WorldSpecTests.cs(71,0): at Wriggle.Tests.Specs.WorldSpecTests.Ammo_HasPlayerWeaponAndEnabled()
+[xUnit.net 00:00:00.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.24]   Finished:    Wriggle.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:06.9930420+01:00">
+        <Text>[xUnit.net 00:00:00.22]     Wriggle.Tests.Specs.PhysicsSpecTests.Body_HasSpecFields [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:06.9947020+01:00">
+        <Text>[xUnit.net 00:00:00.22]     Wriggle.Tests.Specs.CoreSpecTests.Scene_HasStatus [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:07.0523810+01:00">
+        <Text>[xUnit.net 00:00:00.24]     Wriggle.Tests.Specs.WorldSpecTests.GameWorld_HasSpecFields [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:07.0525130+01:00">
+        <Text>[xUnit.net 00:00:00.24]     Wriggle.Tests.Specs.WorldSpecTests.WeaponGrant_TypeExists [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:07.0532100+01:00">
+        <Text>[xUnit.net 00:00:00.24]     Wriggle.Tests.Specs.CoreSpecTests.RestartCurrentScene_IgnoredWhenSwitchAlreadyQueued [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:07.0532260+01:00">
+        <Text>[xUnit.net 00:00:00.24]     Wriggle.Tests.Specs.WorldSpecTests.RoundAmmoGranted_EnablesAmmoForThatRound [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:07.0533910+01:00">
+        <Text>[xUnit.net 00:00:00.24]     Wriggle.Tests.Specs.WorldSpecTests.AmmoGrant_TypeExists [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Sams-MacBook-Air-2" outcome="Error" timestamp="2026-10-12T13:36:07.0535320+01:00">
+        <Text>[xUnit.net 00:00:00.24]     Wriggle.Tests.Specs.WorldSpecTests.Ammo_HasPlayerWeaponAndEnabled [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>
