@@ -17,7 +17,7 @@ public sealed class GameScene : Scene
     private Camera2D camera;
     private Wriggler wriggler;
     private PhysicsWorld physicsWorld;
-    private readonly List<Character> characters = new();
+    private readonly List<Character> characters = [];
     private bool isCarveMode = true;
 
 

@@ -9,15 +9,15 @@ public class PhysicsWorld
 {
     private float gravity = 600f;
     private const int CollisionSolverIterations = 8;
-    private readonly Terrain terrain;
-    private readonly List<Body> bodies = new();
+    public Terrain Terrain;
+    private readonly List<Body> bodies = [];
     public int BodyCount => bodies.Count;
 
     private readonly record struct BroadPhaseEntry(Rectangle Bounds, Body Body);
 
     public PhysicsWorld(Terrain terrain)
     {
-        this.terrain = terrain;
+        Terrain = terrain;
     }
 
     public void AddBody(Body body)
@@ -52,7 +52,7 @@ public class PhysicsWorld
         Vector2 previousPosition = body.Position;
         body.Position += displacement;
 
-        Vector2 normal = body.TerrainCollisionNormal(terrain);
+        Vector2 normal = body.TerrainCollisionNormal(Terrain);
         if (normal.LengthSquared() <= 0.000001f)
             return false;
 
@@ -69,7 +69,7 @@ public class PhysicsWorld
             displacement -= intoSurface * normal;
 
         body.Position += displacement;
-        body.OnCollision(normal, MathF.Min(body.Restitution, terrain.Restitution));
+        body.OnCollision(normal, MathF.Min(body.Restitution, Terrain.Restitution));
         if (walkable && intoSurface < 0f)
             body.isGrounded = true;
 
@@ -118,7 +118,7 @@ public class PhysicsWorld
 
         entries.Sort(static (a, b) => a.Bounds.X.CompareTo(b.Bounds.X));
 
-        List<BroadPhaseEntry> activeEntries = new();
+        List<BroadPhaseEntry> activeEntries = [];
         for (int i = 0; i < entries.Count; i++)
         {
             BroadPhaseEntry current = entries[i];
@@ -153,12 +153,12 @@ public class PhysicsWorld
 
     private void ResolveTerrainPenetration(Body body)
     {
-        int maxCorrections = Math.Clamp(Math.Max(terrain.W, terrain.H), 8, 2048);
+        int maxCorrections = Math.Clamp(Math.Max(Terrain.W, Terrain.H), 8, 2048);
         Vector2 collisionNormal = Vector2.Zero;
 
         for (int i = 0; i < maxCorrections; i++)
         {
-            Vector2 normal = body.TerrainCollisionNormal(terrain);
+            Vector2 normal = body.TerrainCollisionNormal(Terrain);
             if (normal.LengthSquared() <= 0.000001f)
                 break;
 
@@ -170,14 +170,14 @@ public class PhysicsWorld
 
         if (collisionNormal != Vector2.Zero)
         {
-            body.OnCollision(collisionNormal, MathF.Min(body.Restitution, terrain.Restitution));
+            body.OnCollision(collisionNormal, MathF.Min(body.Restitution, Terrain.Restitution));
             if (body.IsWalkableSurface(collisionNormal))
                 body.isGrounded = true;
         }
     }
     public void CarveTerrain(Vector2 center, float radius)
     {
-        terrain.Carve((int)center.X, (int)center.Y, (int)radius);
+        Terrain.Carve((int)center.X, (int)center.Y, (int)radius);
     }
 
     public void Draw()

@@ -7,8 +7,8 @@ namespace Wriggle.Core;
 /// </summary>
 public sealed class SceneManager
 {
-    private readonly Dictionary<Type, Func<Scene>> _factories = new();
-    private readonly Dictionary<Type, Scene> _instances = new();
+    private readonly Dictionary<Type, Func<Scene>> _factories = [];
+    private readonly Dictionary<Type, Scene> _instances = [];
     private Type? _pending;
 
     public Scene? Current { get; private set; }
