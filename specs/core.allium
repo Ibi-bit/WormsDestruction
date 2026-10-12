@@ -11,6 +11,7 @@
 --   - Debug UI widgets: tooling
 --   - Maximise-after-first-frame: workaround for window manager behaviour; underlying need is "window starts maximised"
 --   - The concrete scenes (title, gameplay, pause, settings): specified in their own specs
+--   - Escape handling: gameplay returns to the menu; the menu scene is not yet specified
 
 entity Scene {
     status: unloaded | active | inactive
@@ -34,14 +35,16 @@ rule GameStarted {
 rule SceneSwitchRequested {
     when: ChangeScene(target)
 
+    -- Precondition: target must be a registered scene type; violating it is a programming error
     ensures: SceneManager.pending = target
 }
 
 rule RestartCurrentScene {
     when: RestartCurrent()
     requires: SceneManager.current != null
+    requires: SceneManager.pending = null
 
-    -- The cached instance is discarded; the next activation builds a fresh one
+    -- The outgoing instance exits (OnExit) before it is discarded; the next activation builds a fresh one
     ensures: SceneManager.current.status = unloaded
     ensures: SceneManager.pending = SceneManager.current
 }
@@ -61,6 +64,7 @@ rule SwitchSceneApplied {
 
 rule FrameProcessed {
     when: Frame(dt)
+    -- Once GameStarted has run, a scene is always active; frames before that are not processed
     requires: SceneManager.current != null
 
     -- Order matters: a switch requested during update takes effect before drawing
@@ -68,12 +72,3 @@ rule FrameProcessed {
     ensures: ApplyPending()
     ensures: SceneManager.current.draw()
 }
-
--- Open questions (judgement calls not confirmed from code)
-
-open question "Escape is disabled as the exit key and each scene decides what it does. Which scenes handle Escape, and is returning to menu from gameplay the intended behaviour?"
-open question "ChangeTo a scene type that was never registered throws. Should this be a requirement that it is always registered, or should the request be ignored?"
-open question "RestartCurrent overwrites any switch already queued in the same frame, so the queued change is lost. Intended, or should the queued change win?"
-open question "Scene instances are cached, so switching away and back restores their previous state. Is state preservation intended, or should every entry start fresh?"
-open question "Outgoing scene's OnExit runs on the old instance even when it is being restarted and discarded. Is that the intended cleanup order?"
-open question "Frame(dt) assumes a current scene exists. Before the first switch completes, frames are skipped. Should the spec require a scene to always be active?"
