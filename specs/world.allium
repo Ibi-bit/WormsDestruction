@@ -1,0 +1,193 @@
+-- allium: 3
+-- world.allium
+
+-- Scope: World state, round and turn progression, and destructible terrain
+-- Includes: GameWorld, RoundController, TurnController, Terrain (solid map, carving, painting)
+-- Excludes:
+--   - Player, Weapon and Ammo internals (specified elsewhere)
+--   - Physics contact resolution (CircleCollisionNormal, CapsuleCollisionNormal, FindEscapeNormal): implementation of collision
+--   - Image loading, texture upload, drawing, unloading: infrastructure
+--   - Scorch shading of pixels near a crater: cosmetic (see open questions)
+
+given {
+    world: GameWorld
+}
+
+external entity Player {}
+external entity Weapon {}
+
+value Colour {
+    r: Integer
+    g: Integer
+    b: Integer
+    a: Integer
+}
+
+entity Terrain {
+    width: Integer
+    height: Integer
+    restitution: Decimal
+
+    cells: Cell with terrain = this
+}
+
+entity Cell {
+    terrain: Terrain
+    x: Integer
+    y: Integer
+    solid: Boolean
+    colour: Colour?
+
+    -- Parameterised derived values: squared distance comparisons, no sqrt needed
+    is_within(cx, cy, r): (x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r
+    is_in_ring(cx, cy, r, w): is_within(cx, cy, r + w) and not is_within(cx, cy, r)
+}
+
+entity GameWorld {
+    terrain: Terrain
+    players: List<Player>
+    weapons: List<Weapon>
+    current_round: Integer
+    current_turn_index: Integer
+}
+
+entity Ammo {
+    player: Player
+    weapon: Weapon
+    enabled: Boolean
+}
+
+entity WeaponGrant {
+    weapon: Weapon
+    round: Integer
+    amount: Integer
+}
+
+entity AmmoGrant {
+    ammo: Ammo
+    round: Integer
+    amount: Integer
+}
+
+config {
+    terrain_restitution_default: Decimal = 0.25
+    terrain_restitution_min: Decimal = 0
+    terrain_restitution_max: Decimal = 1
+    solid_alpha_threshold: Integer = 128
+    scorch_ring_width: Integer = 4
+    scorch_brightness: Decimal = 0.55
+}
+
+-- Terrain
+
+rule TerrainLoadedFromImage {
+    when: TerrainLoaded(pixels, width, height)
+
+    ensures: Terrain.created(
+        width: width,
+        height: height,
+        restitution: config.terrain_restitution_default
+    )
+    ensures:
+        for pixel in pixels:
+            Cell.created(
+                x: pixel.x,
+                y: pixel.y,
+                solid: pixel.alpha > config.solid_alpha_threshold,
+                colour: pixel.colour
+            )
+}
+
+rule ExplosionCarvesTerrain {
+    when: Explosion(centre_x, centre_y, radius)
+
+    ensures:
+        for cell in world.terrain.cells where cell.is_within(centre_x, centre_y, radius):
+            cell.solid = false
+            cell.colour = null
+    ensures:
+        for cell in world.terrain.cells where cell.is_in_ring(centre_x, centre_y, radius, config.scorch_ring_width):
+            cell.colour = scorch(cell.colour, config.scorch_brightness)
+}
+
+rule TerrainPainted {
+    when: TerrainPainted(centre_x, centre_y, radius, colour)
+
+    ensures:
+        for cell in world.terrain.cells where cell.is_within(centre_x, centre_y, radius):
+            cell.solid = true
+            cell.colour = colour
+}
+
+rule RestitutionSet {
+    when: RestitutionSet(value)
+
+    ensures: world.terrain.restitution = clamp(value, config.terrain_restitution_min, config.terrain_restitution_max)
+}
+
+-- Players and weapon inventory
+
+rule PlayerJoins {
+    when: PlayerJoins(player)
+
+    ensures:
+        for weapon in world.weapons:
+            Ammo.created(
+                player: player,
+                weapon: weapon,
+                enabled: false
+            )
+    ensures: world.players.add(player)
+}
+
+rule WeaponDefined {
+    when: WeaponDefined(weapon)
+
+    ensures: world.weapons.add(weapon)
+}
+
+rule RoundAmmoGranted {
+    when: RoundStarted(round)
+
+    ensures:
+        for grant in WeaponGrant where grant.round = round:
+            for ammo in Ammo where ammo.weapon = grant.weapon:
+                AmmoGrant.created(ammo: ammo, round: round, amount: grant.amount)
+}
+
+-- Round and turn progression
+
+rule StartNextRound {
+    when: StartNextRound()
+
+    ensures: world.current_round = world.current_round + 1
+    ensures: RoundStarted(round: world.current_round)
+}
+
+rule AdvanceTurn {
+    when: AdvanceTurn()
+    requires: world.players.count > 0
+
+    ensures:
+        if world.current_turn_index + 1 >= world.players.count:
+            world.current_turn_index = 0
+        else:
+            world.current_turn_index = world.current_turn_index + 1
+}
+
+rule ResetTurnOrder {
+    when: ResetTurnOrder()
+
+    ensures: world.current_turn_index = 0
+}
+
+-- Open questions (judgement calls not confirmed from code)
+
+open question "AddWeapon does not grant the new weapon to players who have already joined. Intended, or should it be granted?"
+open question "A player's Ammo starts disabled and nothing in Game/World enables it. Which part of the system enables it?"
+open question "AddPlayer discards any existing inventory on the player. Intended, or should a rejoining player keep ammo?"
+open question "StartNextRound increments the round before granting, so any ammo granted for round 0 is never given. Accidental?"
+open question "CurrentPlayer throws when there are no players. Should the spec require at least one player before turns start?"
+open question "Scorch shading near craters is cosmetic in the code. Should it be specified, or left to rendering?"
+open question "Terrain restitution is a physics concept stored on the terrain. Does it belong to the world or the physics spec?"
+open question "Is Explosion the right trigger for carving, or is carving caused by a weapon rule in another spec?"
