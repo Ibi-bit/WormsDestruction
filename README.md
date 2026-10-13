@@ -55,3 +55,7 @@ Files in `Game/Content/` are copied to `Content/` beside the executable. Load th
 ## Dependencies
 
 `Raylib-cs` is pinned to 7.0.1 and `rlImgui-cs` to 3.2.0. Keep these versions compatible because the ImGui backend depends on raylib's native ABI.
+
+## Related Projects
+
+- [jev-router](https://github.com/Ibi-bit/jev-router) - A prompt router for AI coding agents that selects appropriate skills and models based on prompt complexity.
