@@ -27,8 +27,8 @@
     <!-- Test projects live under tests/ and are built separately. -->
     <Compile Remove="tests/**" />
     <!-- Submodule project build outputs are not game source files. -->
-    <Compile Remove="Modules/**/bin/**/*.cs" />
-    <Compile Remove="Modules/**/obj/**/*.cs" />
+    <Compile Remove="Game/**/bin/**/*.cs" />
+    <Compile Remove="Game/**/obj/**/*.cs" />
   </ItemGroup>
 
   <ItemGroup>
