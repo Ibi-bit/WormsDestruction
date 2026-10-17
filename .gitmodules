@@ -1,0 +1,9 @@
+[submodule "Modules/Wriggle.Core"]
+	path = Modules/Wriggle.Core
+	url = https://github.com/Ibi-bit/Wriggle.Core.git
+[submodule "Modules/Wriggle.VisualEffects"]
+	path = Modules/Wriggle.VisualEffects
+	url = https://github.com/Ibi-bit/Wriggle.VisualEffects.git
+[submodule "Modules/Wriggle.Physics"]
+	path = Modules/Wriggle.Physics
+	url = https://github.com/Ibi-bit/Wriggle.Physics.git

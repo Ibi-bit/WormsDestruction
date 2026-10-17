@@ -20,6 +20,8 @@ public sealed class GameScene : Scene
     private Camera2D camera;
     private readonly List<Character> characters;
     private readonly List<ExplosionEffect> explosionEffects = [];
+    private readonly FireChargeEffect fireChargeEffect = new();
+    private bool inputsConfigured;
     private bool isCarveMode = true;
 
     public GameScene()
@@ -47,25 +49,42 @@ public sealed class GameScene : Scene
         };
     }
 
+    public override void OnEnter()
+    {
+        if (inputsConfigured)
+            return;
+
+        Controller.Bind("Move", InputBinding.KeyboardAxis(KeyboardKey.A, KeyboardKey.D));
+        Controller.Bind("Jump", InputBinding.Keyboard(KeyboardKey.Space));
+        Controller.Bind("Fire", InputBinding.Keyboard(KeyboardKey.F));
+        Controller.Bind("Carve", InputBinding.Mouse(MouseButton.Left));
+        Controller.Bind("SpawnBody", InputBinding.Mouse(MouseButton.Right));
+        Controller.Bind("Zoom", InputBinding.MouseWheel());
+        inputsConfigured = true;
+    }
+
     public override void Update(float dt)
     {
         Wriggler wriggler = world.TurnController.CurrentPlayer.CurrentWriggler;
         camera.Offset = new Vector2(Raylib.GetScreenWidth() / 2f, Raylib.GetScreenHeight() / 2f);
         Vector2 aimMouseWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), camera);
         Vector2 aimDirection = aimMouseWorld - wriggler.Body.Position;
-        float move =
-            (Raylib.IsKeyDown(KeyboardKey.D) ? 1f : 0f) -
-            (Raylib.IsKeyDown(KeyboardKey.A) ? 1f : 0f);
+        float move = Controller.Value("Move");
+        bool jumpPressed = Controller.WasPressed("Jump");
+        bool firePressed = Controller.WasReleased("Fire");
+        float fireHeldTime = Controller.LastHeldTime("Fire");
+        fireChargeEffect.Position = wriggler.Body.Position;
+        fireChargeEffect.AimDirection = aimDirection;
+        fireChargeEffect.HeldTime = Controller.HeldTime("Fire");
+        fireChargeEffect.IsActive = Controller.IsDown("Fire");
 
-        bool jumpPressed = Raylib.IsKeyPressed(KeyboardKey.Space);
-        bool firePressed = Raylib.IsKeyPressed(KeyboardKey.F);
-        wriggler.Update(world.PhysicsWorld, characters, move, jumpPressed, firePressed, aimDirection, dt);
+        wriggler.Update(world.PhysicsWorld, characters, move, jumpPressed, firePressed, fireHeldTime, aimDirection, dt);
 
         world.PhysicsWorld.Step(dt);
         world.UpdateWeapons(characters, dt);
         UpdateExplosionEffects(dt);
 
-        float wheel = Raylib.GetMouseWheelMove();
+        float wheel = Controller.Value("Zoom");
         if (wheel != 0f)
         {
             Vector2 mouse = Raylib.GetMousePosition();
@@ -77,7 +96,7 @@ public sealed class GameScene : Scene
             camera.Target += worldBeforeZoom - worldAfterZoom;
         }
 
-        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        if (Controller.IsDown("Carve"))
         {
             if (isCarveMode)
             {
@@ -91,7 +110,7 @@ public sealed class GameScene : Scene
                 world.Terrain.Paint((int)mouseWorld.X, (int)mouseWorld.Y, 10, Color.Red);
             }
         }
-        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        if (Controller.IsDown("SpawnBody"))
         {
             Vector2 mouseWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), camera);
             const float bodyRadius = 5f;
@@ -110,6 +129,7 @@ public sealed class GameScene : Scene
         world.PhysicsWorld.Draw();
         foreach (ExplosionEffect effect in explosionEffects)
             effect.Draw();
+        fireChargeEffect.Draw();
         Raylib.EndMode2D();
     }
 

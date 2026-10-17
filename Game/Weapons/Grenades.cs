@@ -80,6 +80,8 @@ public class GrenadeBody : Ball
             return;
         hasExploded = true;
         ExplosionAreaEffect explosionEffect = new(Position, explosionRadius, explosionForce, explosionDamage);
-        explosionEffect.ApplyEffect(world, characters);
+        explosionEffect.ApplyEffect(world);
+        foreach (Character character in characters)
+            character.TakeDamage(explosionEffect.GetDamageAt(character.Body.Position));
     }
 }

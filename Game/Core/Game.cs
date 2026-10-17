@@ -12,12 +12,14 @@ namespace Wriggle.Core;
 public sealed class Game : IDisposable
 {
     private readonly GameConfig _config;
-    private readonly SceneManager _scenes = new();
+    private readonly Controller _controller = new();
+    private readonly SceneManager _scenes;
     private readonly DebugUI _debugUI;
 
     public Game(GameConfig config)
     {
         _config = config;
+        _scenes = new SceneManager(_controller);
 
         ConfigFlags flags = ConfigFlags.Msaa4xHint;
         if (_config.EnableVsync) flags |= ConfigFlags.VSyncHint;
@@ -58,6 +60,7 @@ public sealed class Game : IDisposable
         while (!Raylib.WindowShouldClose())
         {
             float dt = Raylib.GetFrameTime();
+            _controller.Update(dt);
 
             bool screenshotRequested = _debugUI.ProcessShortcuts();
 

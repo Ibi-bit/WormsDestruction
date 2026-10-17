@@ -46,6 +46,7 @@ public class Wriggler : Character
         float move,
         bool jumpPressed,
         bool firePressed,
+        float fireHeldTime,
         Vector2 aimDirection,
         float dt)
     {
@@ -97,7 +98,9 @@ public class Wriggler : Character
             Vector2 direction = aimDirection.LengthSquared() > 0.0001f
                 ? Vector2.Normalize(aimDirection)
                 : Vector2.UnitX;
-            SelectedWeapon.Fire(world, Body.Position, direction, 0f, 0.5f, Body);
+            float force = Math.Clamp(0.25f + fireHeldTime / 1.5f * 0.75f, 0.25f, 1f);
+
+            SelectedWeapon.Fire(world, Body.Position, direction, fireHeldTime, force, Body);
         }
     }
 
