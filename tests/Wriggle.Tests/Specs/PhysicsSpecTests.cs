@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Reflection;
+using Wriggle.Weapons;
 using Wriggle.Physics;
 using Wriggle.World;
 using Xunit;
@@ -49,6 +50,7 @@ public class PhysicsSpecTests
         Assert.True(HasMember(typeof(Body), "Mass"));
         Assert.True(HasMember(typeof(Body), "Restitution"));
         Assert.True(HasMember(typeof(Body), "isGrounded"));
+        Assert.True(HasMember(typeof(Body), "IsKnockedBack"));
         Assert.True(HasMember(typeof(Body), "MaxWalkableSlopeRatio"));
         Assert.True(HasMember(typeof(Body), "InverseMass"));
     }
@@ -95,6 +97,57 @@ public class PhysicsSpecTests
 
         Assert.Equal(Vector2.Zero, body.Velocity);
         Assert.Equal(new Vector2(5, 5), body.Position);
+    }
+
+    [Fact]
+    [Trait("Obligation", "rule-success.GrenadeThrowerIgnored")]
+    public void GrenadeThrowerIgnored_DoesNotMoveThrowerOnFirstStep()
+    {
+        var physics = new PhysicsWorld(new Terrain(200, 200));
+        physics.Gravity = 0f;
+        var thrower = new CapsuleBody(new Vector2(50, 50), 10f, 20f, 10f);
+        var grenade = new GrenadeBody(thrower.Position, 10f, 1f)
+        {
+            IgnoredBody = thrower,
+            Velocity = new Vector2(300f, 0f)
+        };
+        physics.AddBody(thrower);
+        physics.AddBody(grenade);
+
+        physics.Step(1f / 60f);
+
+        Assert.Equal(Vector2.Zero, thrower.Velocity);
+        Assert.Equal(new Vector2(50f, 50f), thrower.Position);
+
+        physics.Step(1f / 60f);
+        physics.Step(1f / 60f);
+            physics.Step(1f / 60f);
+        Assert.True(grenade.ShouldCollideWith(thrower));
+        grenade.Velocity = new Vector2(-300f, 0f);
+        physics.Step(1f / 60f);
+
+        Assert.True(MathF.Abs(thrower.Velocity.X) > 0f);
+    }
+
+    [Fact]
+    [Trait("Obligation", "rule-success.PhysicsRepeatability")]
+    public void PhysicsRepeatability_FixedTimestepStaysWithinTolerance()
+    {
+        (Vector2 position, Vector2 velocity) Simulate()
+        {
+            var physics = new PhysicsWorld(new Terrain(200, 200));
+            var body = new CircleBody(new Vector2(50, 50), 1f, 5f);
+            physics.AddBody(body);
+            for (int i = 0; i < 120; i++)
+                physics.Step(1f / 60f);
+            return (body.Position, body.Velocity);
+        }
+
+        var first = Simulate();
+        var second = Simulate();
+
+        Assert.InRange(Vector2.Distance(first.position, second.position), 0f, 0.001f);
+        Assert.InRange(Vector2.Distance(first.velocity, second.velocity), 0f, 0.001f);
     }
 
     [Fact]
@@ -150,7 +203,82 @@ public class PhysicsSpecTests
 
         physics.ApplyRadialImpulse(Vector2.Zero, 10f, 100f);
 
-        Assert.Equal(70f, body.Velocity.X, 0.01f);
+        // Outward (1, 0) tilted up by the 0.5 bias, normalised, scaled by 100 * (1 - 3/10)
+        Vector2 expected = Vector2.Normalize(new Vector2(1f, -0.5f)) * 70f;
+        Assert.Equal(expected.X, body.Velocity.X, 0.01f);
+        Assert.Equal(expected.Y, body.Velocity.Y, 0.01f);
+        Assert.Equal(70f, body.Velocity.Length(), 0.01f);
+        Assert.True(body.IsKnockedBack);
+    }
+
+    [Fact]
+    [Trait("Obligation", "rule-success.ExplosionImpulseApplied")]
+    public void ExplosionImpulse_SideBlastLaunchesGroundedBodyIntoTheAir()
+    {
+        var physics = new PhysicsWorld(TerrainWithFloor(40, 30));
+        var body = new CircleBody(new Vector2(20, 20), 1f, 1f);
+        physics.AddBody(body);
+        for (int i = 0; i < 180; i++)
+            physics.Step(1f / 60f);
+        Assert.True(body.isGrounded);
+
+        physics.ApplyRadialImpulse(body.Position - new Vector2(5f, 0f), 50f, 500f);
+        physics.Step(1f / 60f);
+
+        Assert.True(body.Velocity.Y < 0f);
+        Assert.False(body.isGrounded);
+        Assert.True(body.IsKnockedBack);
+    }
+
+    [Fact]
+    [Trait("Obligation", "config-default.explosion_upward_bias")]
+    public void PhysicsWorld_DefaultExplosionUpwardBiasIsHalf()
+    {
+        Assert.Equal(0.5f, new PhysicsWorld(new Terrain(20, 20)).ExplosionUpwardBias);
+    }
+
+    [Fact]
+    [Trait("Obligation", "rule-success.KnockbackEnded")]
+    public void KnockbackEnded_WhenBodyLandsOnFloor()
+    {
+        var physics = new PhysicsWorld(TerrainWithFloor(20, 10));
+        var body = new CircleBody(new Vector2(5, 5), 1f, 1f) { IsKnockedBack = true };
+        physics.AddBody(body);
+
+        for (int i = 0; i < 180; i++)
+            physics.Step(1f / 60f);
+
+        Assert.True(body.isGrounded);
+        Assert.False(body.IsKnockedBack);
+    }
+
+    [Fact]
+    [Trait("Obligation", "rule-failure.KnockbackEnded.1")]
+    public void KnockbackEnded_LandingWithoutKnockbackLeavesFlagClear()
+    {
+        var physics = new PhysicsWorld(TerrainWithFloor(20, 10));
+        var body = new CircleBody(new Vector2(5, 5), 1f, 1f);
+        physics.AddBody(body);
+
+        for (int i = 0; i < 180; i++)
+            physics.Step(1f / 60f);
+
+        Assert.True(body.isGrounded);
+        Assert.False(body.IsKnockedBack);
+    }
+
+    [Fact]
+    [Trait("Obligation", "rule-success.KnockbackEnded")]
+    public void KnockbackEnded_NotWhileAirborne()
+    {
+        var physics = new PhysicsWorld(new Terrain(20, 20));
+        var body = new CircleBody(new Vector2(5, 5), 1f, 1f) { IsKnockedBack = true };
+        physics.AddBody(body);
+
+        physics.Step(1f / 60f);
+
+        Assert.False(body.isGrounded);
+        Assert.True(body.IsKnockedBack);
     }
 
     [Fact]

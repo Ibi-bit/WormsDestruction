@@ -1,0 +1,120 @@
+-- allium: 3
+-- weapons.allium
+
+-- Scope: Grenade throwing, fuse, detonation and the ammo it spends
+-- Includes: Grenade (one in flight at a time per thrower), its fuse, and the explosion it emits
+-- Excludes:
+--   - Weapon base class and its Update dispatch: structural, a grenade is the only weapon
+--   - Aim direction and throw force: chosen by the caller (player input), passed in
+--   - Ammo grants, enablement and per-round amounts: specified in the world spec
+--   - Explosion carving, radial impulse and terrain response: specified in the physics and world specs
+--   - Character health and clamping at zero: specified with characters
+--   - Ball rendering, colour and drawing of the grenade: tooling
+--   - Body collision of the grenade in flight: specified in the physics spec
+
+given {
+    world: GameWorld
+    physics: PhysicsWorld
+    characters: List<Character>
+    grenades: List<Grenade>
+}
+
+external entity Player {}
+external entity Character {
+    position: Vector
+}
+external entity Ammo {
+    enabled: Boolean
+    count: Integer
+}
+external entity Body {
+    position: Vector
+}
+
+value Vector {
+    x: Decimal
+    y: Decimal
+
+    length_squared: x * x + y * y
+}
+
+-- A thrower's grenade state; the grenade body exists only while in flight
+entity Grenade {
+    owner: Player
+    status: ready | in_flight
+    fuse_remaining: Decimal
+    body: Body?
+
+    is_in_flight: status = in_flight
+}
+
+config {
+    fuse_duration: Decimal = 3
+    launch_speed: Decimal = 1000
+    body_radius: Decimal = 10
+    body_mass: Decimal = 1
+    explosion_radius: Decimal = 50
+    explosion_force: Decimal = 500
+    explosion_damage: Decimal = 50
+}
+
+-- Throwing
+
+-- Ammo is the thrower's Ammo for the grenade. Each accepted throw spends one unit.
+-- Cooking the fuse before throwing shortens it; cooking cannot make it negative.
+-- A zero-length aim falls back to rightward. Force below zero is treated as zero.
+rule GrenadeThrown {
+    when: GrenadeFired(grenade, ammo, origin, direction, time_cooked, force)
+    requires: grenade.status = ready
+    requires: ammo.enabled and ammo.count >= 1
+
+    let launch_direction = if direction.length_squared > 0: direction.normalised else: Vector(x: 1, y: 0)
+
+    ensures: ammo.count = ammo.count - 1
+    ensures: grenade.status = in_flight
+    ensures: grenade.fuse_remaining = max(0, config.fuse_duration - max(0, time_cooked))
+    ensures:
+        grenade.body = Body.created(
+            position: origin,
+            velocity: launch_direction * config.launch_speed * max(0, force),
+            mass: config.body_mass,
+            radius: config.body_radius
+        )
+    ensures: physics.bodies.add(grenade.body)
+}
+
+-- Fuse
+
+rule GrenadeFuseTicked {
+    when: Step(dt)
+    requires: dt > 0
+
+    ensures:
+        for grenade in grenades where grenade.is_in_flight and grenade.fuse_remaining - dt > 0:
+            grenade.fuse_remaining = grenade.fuse_remaining - dt
+}
+
+-- Detonation happens on the step in which the fuse runs out, not on the next one.
+-- Each grenade in flight detonates at its own centre; the thrower is not excluded from damage.
+rule GrenadeDetonated {
+    when: Step(dt)
+    requires: dt > 0
+
+    ensures:
+        for grenade in grenades where grenade.is_in_flight and grenade.fuse_remaining - dt <= 0:
+            Explosion(centre_x: grenade.body.position.x, centre_y: grenade.body.position.y, radius: config.explosion_radius)
+            ExplosionImpulse(centre: grenade.body.position, radius: config.explosion_radius, force: config.explosion_force)
+            grenade.status = ready
+            -- Damage falls off linearly with distance and is zero at the edge of the radius
+            for character in characters where (character.position - grenade.body.position).length < config.explosion_radius:
+                CharacterDamaged(
+                    character: character,
+                    amount: config.explosion_damage * (1 - (character.position - grenade.body.position).length / config.explosion_radius)
+                )
+            physics.bodies.remove(grenade.body)
+            grenade.body = null
+}
+
+-- Open questions
+
+open question "Grenade ammo is not enforced in code: Fire does not read Count or IsEnabled, and no code sets IsEnabled to true. As specified, a grenade cannot be thrown until ammo is granted and enabled."

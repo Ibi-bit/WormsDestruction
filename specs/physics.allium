@@ -34,6 +34,8 @@ entity Body {
     mass: Decimal
     restitution: Decimal
     is_grounded: Boolean
+    -- Set by explosions; characters ignore movement and jump input while knocked back
+    is_knocked_back: Boolean
     max_walkable_slope: Decimal
 
     inverse_mass: if mass > 0: 1 / mass else: 0
@@ -48,6 +50,7 @@ entity PhysicsWorld {
 
 config {
     max_walkable_slope_default: Decimal = 4
+    explosion_upward_bias: Decimal = 0.5
 }
 
 -- Stepping
@@ -103,7 +106,18 @@ rule ExplosionImpulseApplied {
     requires: radius > 0 and force > 0
 
     -- Impulse falls off linearly with distance and is zero at the edge of the radius; zero-mass bodies are immovable
+    -- The push direction is tilted upwards by explosion_upward_bias so blasts launch bodies into an arc
+    -- Pushed bodies are knocked back until they land
     ensures:
         for body in physics.bodies where body.mass > 0 and (body.position - centre).length_squared < radius * radius:
-            body.velocity = body.velocity + (body.position - centre).normalised * force * (1 - (body.position - centre).length / radius) * body.inverse_mass
+            body.velocity = body.velocity + ((body.position - centre).normalised + Vector { x: 0, y: -config.explosion_upward_bias }).normalised * force * (1 - (body.position - centre).length / radius) * body.inverse_mass
+            body.is_knocked_back = true
+}
+
+-- A knocked-back body recovers once it lands on walkable ground
+rule KnockbackEnded {
+    when: body: Body.is_grounded becomes true
+    requires: body.is_knocked_back
+
+    ensures: body.is_knocked_back = false
 }

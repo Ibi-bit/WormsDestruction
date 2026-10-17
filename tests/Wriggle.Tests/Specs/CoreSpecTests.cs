@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Wriggle.Core;
 using Xunit;
@@ -48,6 +51,26 @@ public class CoreSpecTests
     public void Scene_HasStatus()
     {
         Assert.NotNull(typeof(Scene).GetProperty("Status", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic));
+    }
+
+    [Fact]
+    [Trait("Obligation", "entity-fields.Scene")]
+    public void SceneStatus_TracksLifecycle()
+    {
+        var log = new List<string>();
+        var manager = NewManager(log);
+
+        manager.ChangeTo<SceneA>();
+        manager.ApplyPending();
+        var scene = Assert.IsType<SceneA>(manager.Current);
+        Assert.Equal(Scene.SceneStatus.Active, scene.Status);
+
+        manager.ChangeTo<SceneB>();
+        Assert.Equal(Scene.SceneStatus.PendingExit, scene.Status);
+
+        manager.ApplyPending();
+        Assert.Equal(Scene.SceneStatus.Inactive, scene.Status);
+        Assert.Equal(Scene.SceneStatus.Active, manager.Current!.Status);
     }
 
     [Fact]

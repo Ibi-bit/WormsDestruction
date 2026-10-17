@@ -2,9 +2,10 @@
 -- world.allium
 
 -- Scope: World state, round and turn progression, and destructible terrain
--- Includes: GameWorld, RoundController, TurnController, Terrain (solid map, carving, painting)
+-- Includes: GameWorld, RoundController, TurnController, Terrain (solid map, carving, restitution)
 -- Excludes:
 --   - Player, Weapon and Ammo internals (specified elsewhere)
+--   - Terrain painting (sandbox tool in GameScene, not a game mechanic)
 --   - Physics contact resolution (CircleCollisionNormal, CapsuleCollisionNormal, FindEscapeNormal): implementation of collision
 --   - Image loading, texture upload, drawing, unloading: infrastructure
 --   - Scorch shading of pixels near a crater: cosmetic, left to rendering
@@ -52,21 +53,7 @@ entity GameWorld {
 }
 
 entity Ammo {
-    player: Player
-    weapon: Weapon
     enabled: Boolean
-}
-
-entity WeaponGrant {
-    weapon: Weapon
-    round: Integer
-    amount: Integer
-}
-
-entity AmmoGrant {
-    ammo: Ammo
-    round: Integer
-    amount: Integer
 }
 
 config {
@@ -82,23 +69,26 @@ config {
 rule TerrainLoadedFromImage {
     when: TerrainLoaded(pixels, width, height)
 
-    ensures: Terrain.created(
+    ensures: world.terrain = Terrain.created(
         width: width,
         height: height,
         restitution: config.terrain_restitution_default
     )
+    -- Only solid pixels carry a colour; transparent pixels are empty cells
     ensures:
         for pixel in pixels:
             Cell.created(
+                terrain: world.terrain,
                 x: pixel.x,
                 y: pixel.y,
                 solid: pixel.alpha > config.solid_alpha_threshold,
-                colour: pixel.colour
+                colour: if pixel.alpha > config.solid_alpha_threshold: pixel.colour else: null
             )
 }
 
 -- Emitted by a weapon detonation together with ExplosionImpulse (physics spec), sharing its centre and radius.
 -- The carved area is also the area in which character damage applies.
+-- Carving runs on the whole-cell grid: centre and radius are truncated toward zero before the cell test.
 rule ExplosionCarvesTerrain {
     when: Explosion(centre_x, centre_y, radius)
 
@@ -108,19 +98,11 @@ rule ExplosionCarvesTerrain {
             cell.colour = null
 }
 
+-- The game world handles the request and stores the value on the terrain; out-of-range values are clamped
 rule RestitutionSet {
     when: RestitutionSet(value)
 
     ensures: world.terrain.restitution = clamp(value, config.terrain_restitution_min, config.terrain_restitution_max)
-}
-
-rule TerrainPainted {
-    when: TerrainPainted(centre_x, centre_y, radius, colour)
-
-    ensures:
-        for cell in world.terrain.cells where cell.is_within(centre_x, centre_y, radius):
-            cell.solid = true
-            cell.colour = colour
 }
 
 -- Players and weapon inventory
@@ -130,12 +112,8 @@ rule PlayerJoins {
 
     -- A rejoining player keeps existing ammo; only missing records are created
     ensures:
-        for weapon in world.weapons where not Ammo.exists(player: player, weapon: weapon):
-            Ammo.created(
-                player: player,
-                weapon: weapon,
-                enabled: false
-            )
+        for weapon in world.weapons:
+            Ammo.created(enabled: false)
     ensures: world.players.add(player)
 }
 
@@ -151,18 +129,16 @@ rule WeaponInventoryUpdated {
 
     ensures:
         for player in world.players:
-            for weapon in world.weapons where not Ammo.exists(player: player, weapon: weapon):
-                Ammo.created(player: player, weapon: weapon, enabled: false)
+            for weapon in world.weapons:
+                Ammo.created(enabled: false)
 }
 
 rule RoundAmmoGranted {
     when: RoundStarted(round)
 
     ensures:
-        for grant in WeaponGrant where grant.round = round:
-            for ammo in Ammo where ammo.weapon = grant.weapon:
-                AmmoGrant.created(ammo: ammo, round: round, amount: grant.amount)
-                ammo.enabled = true
+        for ammo in Ammo:
+            ammo.enabled = true
 }
 
 -- Round and turn progression

@@ -16,7 +16,7 @@ public class WorldSpecTests
 {
     private sealed class TestWeapon : Weapon
     {
-        public override void Fire(PhysicsWorld world, Vector2 position, Vector2 direction, float timeCooked, float force) { }
+        public override void Fire(PhysicsWorld world, Vector2 position, Vector2 direction, float timeCooked, float force, Body? owner = null) { }
         public override void Update(PhysicsWorld world, IReadOnlyList<Character> characters, float dt) { }
     }
 
@@ -65,25 +65,9 @@ public class WorldSpecTests
 
     [Fact]
     [Trait("Obligation", "entity-fields.Ammo")]
-    public void Ammo_HasPlayerWeaponAndEnabled()
+    public void Ammo_HasEnabled()
     {
         Assert.True(HasMember(typeof(Ammo), "IsEnabled"));
-        Assert.True(HasMember(typeof(Ammo), "Player"));
-        Assert.True(HasMember(typeof(Ammo), "Weapon"));
-    }
-
-    [Fact]
-    [Trait("Obligation", "entity-fields.WeaponGrant")]
-    public void WeaponGrant_TypeExists()
-    {
-        Assert.NotNull(typeof(GameWorld).Assembly.GetType("Wriggle.World.WeaponGrant"));
-    }
-
-    [Fact]
-    [Trait("Obligation", "entity-fields.AmmoGrant")]
-    public void AmmoGrant_TypeExists()
-    {
-        Assert.NotNull(typeof(GameWorld).Assembly.GetType("Wriggle.World.AmmoGrant"));
     }
 
     [Fact]
@@ -202,7 +186,8 @@ public class WorldSpecTests
         world.RoundController.StartNextRound();
 
         Assert.Equal(1, world.RoundController.CurrentRound);
-        Assert.True(player.WeaponInventory[weapon].AmmoByRound.ContainsKey(1));
+        Assert.True(player.WeaponInventory[weapon].IsEnabled);
+        Assert.Contains(world.RoundController.CurrentRound, player.WeaponInventory[weapon].AmmoByRound.Keys);
     }
 
     [Fact]

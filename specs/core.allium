@@ -14,7 +14,7 @@
 --   - Escape handling: gameplay returns to the menu; the menu scene is not yet specified
 
 entity Scene {
-    status: unloaded | active | inactive
+    status: active | inactive | pending_exit
 }
 
 entity SceneManager {
@@ -37,6 +37,7 @@ rule SceneSwitchRequested {
 
     -- Precondition: target must be a registered scene type; violating it is a programming error
     ensures: SceneManager.pending = target
+    ensures: SceneManager.current.status = pending_exit
 }
 
 rule RestartCurrentScene {
@@ -45,7 +46,7 @@ rule RestartCurrentScene {
     requires: SceneManager.pending = null
 
     -- The outgoing instance exits (OnExit) before it is discarded; the next activation builds a fresh one
-    ensures: SceneManager.current.status = unloaded
+    ensures: SceneManager.current.status = pending_exit
     ensures: SceneManager.pending = SceneManager.current
 }
 
