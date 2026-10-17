@@ -7,13 +7,23 @@ namespace Wriggle.Core;
 /// </summary>
 public abstract class Scene
 {
+    public enum SceneStatus
+    {
+        Inactive,
+        Active,
+        PendingExit
+    }
     /// <summary>Short human-readable name shown in the debug UI.</summary>
     public abstract string Name { get; }
 
     /// <summary>The manager this scene is attached to. Use it to switch scenes.</summary>
     protected SceneManager Scenes { get; private set; } = null!;
 
+    public SceneStatus Status { get; private set; } = SceneStatus.Inactive;
+
     internal void Attach(SceneManager manager) => Scenes = manager;
+
+    internal void SetStatus(SceneStatus status) => Status = status;
 
     public virtual void OnEnter() { }
 

@@ -10,7 +10,10 @@ public abstract class Body
     public Vector2 Position;
     public Vector2 Velocity;
     public bool isGrounded = false;
+    public bool IsKnockedBack;
     public float Mass;
+    public float InverseMass => Mass > 0f ? 1f / Mass : 0f;
+
     public virtual float Radius { get; protected set; }
     public virtual float MaxWalkableSlopeRatio => float.PositiveInfinity;
     private float restitution;
@@ -41,6 +44,8 @@ public abstract class Body
     }
 
     public virtual void CompleteStep() { }
+
+    public virtual bool ShouldCollideWith(Body other) => true;
 
     public virtual void GetCollisionSegment(out Vector2 start, out Vector2 end)
     {

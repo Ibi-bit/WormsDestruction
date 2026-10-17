@@ -30,20 +30,34 @@ public class Wriggler : Character
     public bool IsOnGround => Body.isGrounded;
     private float jumpBufferRemaining;
     private float coyoteTimeRemaining;
-    private readonly Grenade grenade = new();
+    public Weapon SelectedWeapon { get; set; } = new Grenade();
 
     public Wriggler(Vector2 position, float height, float width, float mass, Color color)
     {
         Color = color;
-        Body = new CapsuleBody(position, mass, height, width);
-        Body.Restitution = 0f;
+        Body = new CapsuleBody(position, mass, height, width)
+        {
+            Restitution = 0f
+        };
     }
-    public void Update(PhysicsWorld world, IReadOnlyList<Character> characters, float move, bool jumpPressed, bool firePressed, float dt)
+    public void Update(
+        PhysicsWorld world,
+        IReadOnlyList<Character> characters,
+        float move,
+        bool jumpPressed,
+        bool firePressed,
+        Vector2 aimDirection,
+        float dt)
     {
         if (dt <= 0f)
             return;
 
-        grenade.Update(world, characters, dt);
+
+        if (Body.IsKnockedBack)
+        {
+            move = 0f;
+            jumpPressed = false;
+        }
 
         move = Math.Clamp(move, -1f, 1f);
         jumpBufferRemaining = jumpPressed
@@ -58,9 +72,10 @@ public class Wriggler : Character
         float acceleration = IsOnGround
             ? (hasMoveInput ? GroundAcceleration : GroundDeceleration)
             : (hasMoveInput ? AirAcceleration : AirDeceleration);
-        Body.Velocity.X = MoveTowards(Body.Velocity.X, targetSpeed, acceleration * dt);
+        if (!Body.IsKnockedBack)
+            Body.Velocity.X = MoveTowards(Body.Velocity.X, targetSpeed, acceleration * dt);
 
-        bool jumped = jumpBufferRemaining > 0f && coyoteTimeRemaining > 0f;
+        bool jumped = !Body.IsKnockedBack && jumpBufferRemaining > 0f && coyoteTimeRemaining > 0f;
         if (jumped)
         {
             Body.Velocity.Y = -JumpForce;
@@ -79,7 +94,10 @@ public class Wriggler : Character
 
         if (firePressed)
         {
-            grenade.Fire(world, Body.Position, new Vector2(1f, -0.5f), 0f, 0.5f);
+            Vector2 direction = aimDirection.LengthSquared() > 0.0001f
+                ? Vector2.Normalize(aimDirection)
+                : Vector2.UnitX;
+            SelectedWeapon.Fire(world, Body.Position, direction, 0f, 0.5f, Body);
         }
     }
 

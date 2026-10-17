@@ -16,3 +16,6 @@ Content/
 
 Load paths are relative to the executable directory:
 `Path.Combine(AppContext.BaseDirectory, "Content", "textures", "player.png")`.
+
+`textures/explosion_fire.png` is from Kenney's Particle Pack and is licensed
+under CC0: https://kenney.nl/assets/particle-pack

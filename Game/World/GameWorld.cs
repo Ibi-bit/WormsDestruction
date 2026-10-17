@@ -1,6 +1,8 @@
+using Wriggle.Characters;
 using Wriggle.Players;
 using Wriggle.Weapons;
 using Wriggle.Physics;
+using System.Numerics;
 
 namespace Wriggle.World;
 
@@ -12,6 +14,7 @@ public class GameWorld
     public RoundController RoundController { get; }
     public TurnController TurnController { get; }
     public PhysicsWorld PhysicsWorld;
+    public float Gravity { get => PhysicsWorld?.Gravity ?? throw new InvalidOperationException("PhysicsWorld is not initialized.");set => PhysicsWorld.Gravity = value; }
 
     public GameWorld(PhysicsWorld physicsWorld)
     {
@@ -48,7 +51,23 @@ public class GameWorld
             }
         }
     }
-    
+
+    public void UpdateWeapons(IReadOnlyList<Character> characters, float dt)
+    {
+        HashSet<Weapon> weaponsToUpdate = [];
+
+        foreach (InventoryWeapon inventoryWeapon in Weapons)
+            weaponsToUpdate.Add(inventoryWeapon.Weapon);
+
+        foreach (Player player in Players)
+        {
+            foreach (Wriggler wriggler in player.Wrigglers)
+                weaponsToUpdate.Add(wriggler.SelectedWeapon);
+        }
+
+        foreach (Weapon weapon in weaponsToUpdate)
+            weapon.Update(PhysicsWorld, characters, dt);
+    }
 
     public void AddPlayer(Player player)
     {
@@ -80,6 +99,7 @@ public class GameWorld
                 continue;
 
             ammo.AddRoundAmmo(round, amount);
+            ammo.IsEnabled = true;
         }
     }
 }

@@ -20,15 +20,19 @@ public sealed class SceneManager
     }
 
     /// <summary>Queue a switch; it is applied by the game loop right after the current Update.</summary>
-    public void ChangeTo<T>() where T : Scene => _pending = typeof(T);
+    public void ChangeTo<T>() where T : Scene => ChangeTo(typeof(T));
 
     /// <summary>Runtime variant, e.g. for scene types resolved from config.</summary>
-    public void ChangeTo(Type sceneType) => _pending = sceneType;
+    public void ChangeTo(Type sceneType)
+    {
+        Current?.SetStatus(Scene.SceneStatus.PendingExit);
+        _pending = sceneType;
+    }
 
     /// <summary>Rebuild the current scene from scratch (same effect as a fresh start).</summary>
     public void RestartCurrent()
     {
-        if (Current is null) return;
+        if (Current is null || _pending is not null) return;
         _instances.Remove(Current.GetType());
         _pending = Current.GetType();
     }
@@ -40,7 +44,11 @@ public sealed class SceneManager
         Type type = _pending;
         _pending = null;
 
-        Current?.OnExit();
+        if (Current is not null)
+        {
+            Current.OnExit();
+            Current.SetStatus(Scene.SceneStatus.Inactive);
+        }
 
         if (!_instances.TryGetValue(type, out Scene? scene))
         {
@@ -50,6 +58,7 @@ public sealed class SceneManager
         }
 
         Current = scene;
+        scene.SetStatus(Scene.SceneStatus.Active);
         scene.OnEnter();
     }
 }

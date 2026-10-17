@@ -7,7 +7,7 @@ namespace Wriggle.Weapons;
 
 public abstract class Weapon
 {
-    public abstract void Fire(PhysicsWorld world, Vector2 position, Vector2 direction, float timeCooked, float force);
+    public abstract void Fire(PhysicsWorld world, Vector2 position, Vector2 direction, float timeCooked, float force, Body? owner = null);
     public abstract void Update(PhysicsWorld world, IReadOnlyList<Character> characters, float dt);
 }
 

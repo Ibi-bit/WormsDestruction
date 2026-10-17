@@ -7,7 +7,8 @@ namespace Wriggle.Physics;
 
 public class PhysicsWorld
 {
-    private float gravity = 600f;
+    public float Gravity = 600f;
+    public float ExplosionUpwardBias = 0.5f;
     private const int CollisionSolverIterations = 8;
     public Terrain Terrain;
     private readonly List<Body> bodies = [];
@@ -40,11 +41,16 @@ public class PhysicsWorld
             if (distance >= radius || body.Mass <= 0f)
                 continue;
 
-            Vector2 impulseDirection = distance > 0.0001f
+            Vector2 outward = distance > 0.0001f
                 ? toBody / distance
                 : -Vector2.UnitY;
+            Vector2 biased = outward + new Vector2(0f, -ExplosionUpwardBias);
+            Vector2 impulseDirection = biased.LengthSquared() > 0.000001f
+                ? Vector2.Normalize(biased)
+                : outward;
             float impulseMagnitude = force * (1f - distance / radius);
             body.Velocity += impulseDirection * impulseMagnitude / body.Mass;
+            body.IsKnockedBack = true;
         }
     }
     private bool MoveBodyOnTerrain(Body body, Vector2 displacement)
@@ -80,10 +86,10 @@ public class PhysicsWorld
     {
         if (dt <= 0f) return;
 
-        Vector2 gravityVector = new(0f, gravity);
+        Vector2 gravityVector = new(0f, Gravity);
         foreach (Body body in bodies)
         {
-            float estimatedTravel = body.Velocity.Length() * dt + MathF.Abs(gravity) * dt * dt;
+            float estimatedTravel = body.Velocity.Length() * dt + MathF.Abs(Gravity) * dt * dt;
             int substepCount = Math.Clamp((int)MathF.Ceiling(estimatedTravel), 1, 512);
             float substepDt = dt / substepCount;
             body.isGrounded = false;
@@ -107,7 +113,11 @@ public class PhysicsWorld
         }
 
         foreach (Body body in bodies)
+        {
+            if (body.isGrounded)
+                body.IsKnockedBack = false;
             body.CompleteStep();
+        }
     }
 
     private void BroadPhaseCollisionDetection()
@@ -132,7 +142,9 @@ public class PhysicsWorld
 
             foreach (BroadPhaseEntry active in activeEntries)
             {
-                if (BoundsOverlap(current.Bounds, active.Bounds))
+                if (current.Body.ShouldCollideWith(active.Body)
+                    && active.Body.ShouldCollideWith(current.Body)
+                    && BoundsOverlap(current.Bounds, active.Bounds))
                 {
                     float restitution = MathF.Min(current.Body.Restitution, active.Body.Restitution);
                     current.Body.ResolveDynamicCollision(active.Body, restitution);
@@ -191,8 +203,9 @@ public class PhysicsWorld
     public void DebugMenu()
     {
         ImGui.Begin("Physics World");
-        ImGui.Text($"Gravity: {gravity}");
-        ImGui.InputFloat("Gravity", ref gravity, 10f, 50f, "%.1f");
+        ImGui.Text($"Gravity: {Gravity}");
+        ImGui.InputFloat("Gravity", ref Gravity, 10f, 50f, "%.1f");
+        ImGui.SliderFloat("Explosion Upward Bias", ref ExplosionUpwardBias, 0f, 2f);
         ImGui.Text($"Bodies: {bodies.Count}");
         ImGui.End();
     }
