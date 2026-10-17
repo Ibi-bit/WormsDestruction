@@ -4,3 +4,4 @@ obj/
 *.user
 *.suo
 imgui.ini
+.opencode/node_modules/

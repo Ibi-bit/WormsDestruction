@@ -1,6 +1,10 @@
 {
     "chat.tools.terminal.autoApprove": {
         "dotnet build": true,
-        "allium": true
+        "allium": true,
+        "/^dotnet build --no-restore$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }
